@@ -1,5 +1,8 @@
-﻿namespace centrica.datamodels
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace centrica.datamodels
 {
+    [Table("ProductStoreSell")]
     public class ProductStoreSell
     {
         public int Id { get; set; }

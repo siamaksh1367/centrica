@@ -1,6 +1,8 @@
-﻿namespace centrica.datamodels
-{
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace centrica.datamodels
+{
+    [Table("DistrictSalePerson")]
     public class DistrictSalePerson
     {
         public int Id { get; set; }

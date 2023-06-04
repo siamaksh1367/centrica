@@ -1,5 +1,8 @@
-﻿using centrica.repository.Generic;
+﻿using centrica.datamodels;
+using centrica.repository.Generic;
 using centrica.repository.Repositories.Interfaces;
+using centrica.services.Queries;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace centrica.serviceRegistration
@@ -26,7 +29,8 @@ namespace centrica.serviceRegistration
                 .AddTransient<IProductStoreSellRepository, ProductStoreSellRepository>()
                 .AddTransient<ITransitionPeriodRepository, TransitionPeriodRepository>()
                 .AddTransient<ISalePersonProductRepository, SalePersonProductRepository>()
-                .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly));
+                .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly))
+                .AddTransient<IRequestHandler<GetDistrictsQuery, IEnumerable<District>>, GetDistrictsQueryHandler>();
         }
     }
 }

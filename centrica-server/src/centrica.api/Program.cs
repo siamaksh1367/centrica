@@ -1,3 +1,4 @@
+using centrica.configurations;
 using static centrica.serviceRegistration.ServiceRegistration;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices();
+builder.Services.Configure<DataBaseConfiguration>(builder.Configuration.GetSection("DataBaseConfiguration"));
 
 var app = builder.Build();
 

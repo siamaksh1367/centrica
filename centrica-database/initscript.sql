@@ -170,3 +170,8 @@ USE [master]
 GO
 ALTER DATABASE [Centrica] SET  READ_WRITE 
 GO
+
+
+INSERT INTO [dbo].[District] ([Name])VALUES('North Denmark')
+INSERT INTO [dbo].[District] ([Name])VALUES('Southern Denmark')
+GO

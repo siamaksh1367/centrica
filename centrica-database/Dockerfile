@@ -10,9 +10,6 @@ COPY initscript.sql /opt/mssql-scripts
 
 # set environment variables
 ENV ACCEPT_EULA=Y
-
-# set the SA password as an environment variable
-#ENV SA_PASSWORD=${MSSQL_SA_PASSWORD}
 ENV SA_PASSWORD=P@ssw0rd
 
 EXPOSE 1433

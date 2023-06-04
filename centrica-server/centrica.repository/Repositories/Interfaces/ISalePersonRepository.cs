@@ -8,7 +8,7 @@ namespace centrica.repository.Repositories.Interfaces
     public interface ISalePersonRepository : IGenericRepository<SalePerson> { }
     public class SalePersonRepository : AbstractRepository<SalePerson>, ISalePersonRepository
     {
-        public SalePersonRepository(IOptions<DataBaseConfiguration> config) : base(config)
+        public SalePersonRepository(IOptions<ConnectionStrings> config) : base(config)
         {
         }
     }

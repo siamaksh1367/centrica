@@ -8,7 +8,7 @@ namespace centrica.repository.Repositories.Interfaces
     public interface ITransitionPeriodRepository : IGenericRepository<TransitionPeriod> { }
     public class TransitionPeriodRepository : AbstractRepository<TransitionPeriod>, ITransitionPeriodRepository
     {
-        public TransitionPeriodRepository(IOptions<DataBaseConfiguration> config) : base(config)
+        public TransitionPeriodRepository(IOptions<ConnectionStrings> config) : base(config)
         {
         }
     }

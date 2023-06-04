@@ -8,7 +8,7 @@ namespace centrica.repository.Repositories.Interfaces
     public interface IProductRepository : IGenericRepository<Product> { }
     public class ProductRepository : AbstractRepository<Product>, IProductRepository
     {
-        public ProductRepository(IOptions<DataBaseConfiguration> config) : base(config)
+        public ProductRepository(IOptions<ConnectionStrings> config) : base(config)
         {
         }
     }

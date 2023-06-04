@@ -1,1 +1,5 @@
-<p>district works!</p>
+<div *ngIf="allDistricts">
+  <ul>
+    <li *ngFor="let district of allDistricts">{{ district.name }}</li>
+  </ul>
+</div>

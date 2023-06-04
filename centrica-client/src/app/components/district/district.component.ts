@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
-import { ApiEndpointsService } from 'src/app/services/general/api-endpoints.service';
-import { ApiHttpService } from 'src/app/services/general/api-http.service';
-
+import { DistrictModel } from 'src/app/models/DistrictModel';
+import { DistrictService } from 'src/app/services/district.service';
 @Component({
   selector: 'app-district',
   templateUrl: './district.component.html',
   styleUrls: ['./district.component.css'],
 })
 export class DistrictComponent {
-  constructor(
-    private apiHttpService: ApiHttpService,
-    private apiEndpointsService: ApiEndpointsService
-  ) {}
+  constructor(private service: DistrictService) {}
+
+  allDistricts: DistrictModel[] = [];
   ngOnInit() {
-    this.apiHttpService
-      .get(this.apiEndpointsService.getWeatherForecast())
-      .subscribe((x) => console.log(x));
+    this.service
+      .getAllDistrict()
+      .subscribe((x: DistrictModel[]) => (this.allDistricts = x));
   }
 }

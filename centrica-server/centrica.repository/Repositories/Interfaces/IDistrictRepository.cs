@@ -8,7 +8,7 @@ namespace centrica.repository.Repositories.Interfaces
     public interface IDistrictRepository : IGenericRepository<District> { }
     public class DistrictRepository : AbstractRepository<District>, IDistrictRepository
     {
-        public DistrictRepository(IOptions<DataBaseConfiguration> config) : base(config)
+        public DistrictRepository(IOptions<ConnectionStrings> config) : base(config)
         {
         }
     }

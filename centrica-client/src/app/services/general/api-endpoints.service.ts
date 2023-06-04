@@ -45,7 +45,7 @@ export class ApiEndpointsService {
     );
     return urlBuilder.toString();
   }
-  public getWeatherForecast(): string {
-    return this.createUrl('WeatherForecast');
+  public allDistrict(): string {
+    return this.createUrl('District');
   }
 }

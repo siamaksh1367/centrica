@@ -3,12 +3,15 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>4f2d0e71-3471-45ff-b3df-2474fc4ed39d</ProjectGuid>
+    <ProjectGuid>9213137f-5c85-4648-985b-09d9222fc102</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>centrica.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="docker-compose.override.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>

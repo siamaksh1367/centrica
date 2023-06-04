@@ -7,15 +7,15 @@ namespace centrica.repository.Generic
 {
     public class AbstractRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly DataBaseConfiguration _config;
+        private readonly ConnectionStrings _config;
 
-        public AbstractRepository(IOptions<DataBaseConfiguration> config)
+        public AbstractRepository(IOptions<ConnectionStrings> config)
         {
             _config = config.Value;
         }
         public async Task<int> AddAsync(T entity)
         {
-            using (SqlConnection connection = new SqlConnection(_config.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
             {
                 return await connection.InsertAsync(entity);
             }
@@ -23,7 +23,7 @@ namespace centrica.repository.Generic
 
         public async Task<bool> DeleteAsync(T entity)
         {
-            using (SqlConnection connection = new SqlConnection(_config.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
             {
                 return await connection.DeleteAsync(entity);
             }
@@ -31,7 +31,7 @@ namespace centrica.repository.Generic
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            using (SqlConnection connection = new SqlConnection(_config.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
             {
                 return await connection.GetAllAsync<T>();
             }
@@ -39,7 +39,7 @@ namespace centrica.repository.Generic
 
         public async Task<T> GetByIdAsync(int id)
         {
-            using (SqlConnection connection = new SqlConnection(_config.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
             {
                 return await connection.GetAsync<T>(id);
             }
@@ -47,7 +47,7 @@ namespace centrica.repository.Generic
 
         public async Task<bool> UpdateAsync(T entity)
         {
-            using (SqlConnection connection = new SqlConnection(_config.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
             {
                 return await connection.UpdateAsync(entity);
             }

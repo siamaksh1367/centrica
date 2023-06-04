@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   angular-app:
     build:
@@ -8,19 +8,33 @@ services:
       - 4200:80
     depends_on:
       - dotnet-app
+
   dotnet-app:
     build:
       context: ./src
       dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sql-server;Database=Centrica;User Id=SA;Password=P@ssw0rd;TrustServerCertificate=True;
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 8080:80
     depends_on:
       - sql-server
-  
+
   sql-server:
+    image: sql-image
+    environment:
+      - SA_PASSWORD=P@ssw0rd
+      - ACCEPT_EULA=Y
     build:
       context: ./../centrica-database
       dockerfile: Dockerfile
     ports:
       - 1433:1433
+
+  centrica.api:
+    image: ${DOCKER_REGISTRY-}centricaapi
+    build:
+      context: .
+      dockerfile: src/centrica.api/Dockerfile
 

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\centrica.datamodels\centrica.datamodels.csproj" />
+    <ProjectReference Include="..\centrica.serviceRegistration\centrica.serviceRegistration.csproj" />
     <ProjectReference Include="..\centrica.services\centrica.services.csproj" />
   </ItemGroup>
 

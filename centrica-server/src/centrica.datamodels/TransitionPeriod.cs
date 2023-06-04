@@ -2,7 +2,7 @@
 
 namespace centrica.datamodels
 {
-    [Table("District")]
+    [Table("TransitionPeriod")]
     public class TransitionPeriod
     {
         public int Id { get; set; }

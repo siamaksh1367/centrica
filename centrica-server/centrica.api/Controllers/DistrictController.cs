@@ -24,13 +24,6 @@ namespace webapi.Controllers
             return await _mediator.Send(new GetDistrictsQuery());
         }
 
-        // GET api/<DistrictController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<DistrictController>
         [HttpPost]
         public void Post([FromBody] string value)

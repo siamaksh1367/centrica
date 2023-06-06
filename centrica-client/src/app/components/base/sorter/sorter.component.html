@@ -1,0 +1,5 @@
+<button class="btn btn-primary rounded-circle" (click)="handleBadgeClick()">
+  <i *ngIf="isAscending()" class="bi bi-caret-up"></i>
+  <i *ngIf="isDescending()" class="bi bi-caret-down"></i>
+  <i *ngIf="isNone()" class="bi bi-arrow-down-up"></i>
+</button>

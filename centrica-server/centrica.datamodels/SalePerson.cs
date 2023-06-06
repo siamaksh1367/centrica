@@ -7,7 +7,7 @@ namespace centrica.datamodels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<DistrictSalePerson> DistrictSalePersons { get; set; }
-        public ICollection<SalePersonProduct> SalePersonProducts { get; set; }
+        public ICollection<District> Districts { get; set; }
+        public ICollection<SalePerson> SalePeople { get; set; }
     }
 }

@@ -1,0 +1,17 @@
+<table class="table">
+  <thead *ngIf="tableModel.hasHeader">
+    <tr>
+      <app-table-header
+        [content]="item"
+        [sortable]="tableModel.hasSorting"
+        *ngFor="let item of tableModel.headers"
+      ></app-table-header>
+      <th *ngIf="tableModel.hasAddNew" scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td *ngFor="let header of tableModel.items">{{ header }}</td>
+    </tr>
+  </tbody>
+</table>

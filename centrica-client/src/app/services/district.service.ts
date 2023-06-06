@@ -15,4 +15,10 @@ export class DistrictService {
   public getAllDistrict() {
     return this.apiHttpService.get(this.apiEndpointsService.allDistrict());
   }
+  public addDistrict(districtModel: DistrictModel) {
+    return this.apiHttpService.post(
+      this.apiEndpointsService.allDistrict(),
+      districtModel
+    );
+  }
 }

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SorterComponent } from './sorter.component';
+import { AddButtonComponent } from './add-button.component';
 
-describe('SorterComponent', () => {
-  let component: SorterComponent;
-  let fixture: ComponentFixture<SorterComponent>;
+describe('AddButtonComponent', () => {
+  let component: AddButtonComponent;
+  let fixture: ComponentFixture<AddButtonComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SorterComponent]
+      declarations: [AddButtonComponent]
     });
-    fixture = TestBed.createComponent(SorterComponent);
+    fixture = TestBed.createComponent(AddButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

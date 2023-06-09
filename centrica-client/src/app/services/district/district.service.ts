@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ApiHttpService } from './general/api-http.service';
-import { ApiEndpointsService } from './general/api-endpoints.service';
-import { DistrictModel } from '../models/DistrictModel';
+import { IDistrictService } from './IDistrictService';
+import { DistrictModel } from 'src/app/models/DistrictModel';
+import { ApiEndpointsService } from '../general/api-endpoints.service';
+import { ApiHttpService } from '../general/api-http.service';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class DistrictService {
+@Injectable()
+export class DistrictService implements IDistrictService {
   constructor(
     private apiHttpService: ApiHttpService<DistrictModel>,
     private apiEndpointsService: ApiEndpointsService

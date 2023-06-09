@@ -1,17 +1,18 @@
 <table class="table">
   <thead *ngIf="tableModel.hasHeader">
-    <tr>
-      <app-table-header
-        [content]="item"
-        [sortable]="tableModel.hasSorting"
-        *ngFor="let item of tableModel.headers"
-      ></app-table-header>
-      <th *ngIf="tableModel.hasAddNew" scope="col">Handle</th>
-    </tr>
+    <th *ngFor="let header of _headers">
+      {{ header }}
+      <app-sort-button *ngIf="tableModel.hasSorting"></app-sort-button>
+    </th>
+    <th *ngIf="tableModel.hasAddNew">
+      <app-add-button></app-add-button>
+    </th>
   </thead>
   <tbody>
-    <tr>
-      <td *ngFor="let header of tableModel.items">{{ header }}</td>
-    </tr>
+    <tr
+      *ngFor="let item of tableModel.items; trackBy: trackByFn"
+      [ngTemplateOutlet]="rowTemplate"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    ></tr>
   </tbody>
 </table>

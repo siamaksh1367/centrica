@@ -455,3 +455,27 @@ aio/content/examples/.DS_Store
 npm-debug.log
 testem.log
 /typings
+# Angular generated files
+/dist/
+/node_modules/
+*.js
+*.js.map
+*.css
+*.css.map
+
+# Angular configuration files
+.angular/*
+.angular-cli.json
+.angular-cli.json.*
+.angular-cli
+.angular-cli.*
+.angular.json
+.angular.json.*
+
+# Angular caching files
+.tmp/
+*.tmp
+.hmr/
+*.hmr
+.e2e/
+*.e2e

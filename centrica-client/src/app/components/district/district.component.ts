@@ -1,6 +1,6 @@
 import { Component, Inject, Type } from '@angular/core';
 import { DistrictModel } from 'src/app/models/DistrictModel';
-import { TableModel } from 'src/app/models/TableModel';
+import { TableModel } from 'src/app/models/base/TableModel';
 import {
   DISTRICT_SERVICE_TOKEN,
   IDistrictService,

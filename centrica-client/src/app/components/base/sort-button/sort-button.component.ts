@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SortOrders } from 'src/app/models/enum/SortOrders';
 
 @Component({
@@ -7,7 +7,7 @@ import { SortOrders } from 'src/app/models/enum/SortOrders';
   styleUrls: ['./sort-button.component.css'],
 })
 export class SortButtonComponent {
-  sortOrder: SortOrders = SortOrders.None;
+  @Input() sortOrder: SortOrders = SortOrders.None;
   @Output() sortClicked = new EventEmitter<SortOrders>();
   handleBadgeClick() {
     if (this.isNone()) {

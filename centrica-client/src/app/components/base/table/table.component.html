@@ -2,7 +2,11 @@
   <thead *ngIf="tableModel.hasHeader">
     <th *ngFor="let header of _headers">
       {{ header }}
-      <app-sort-button *ngIf="tableModel.hasSorting"></app-sort-button>
+      <app-sort-button
+        *ngIf="tableModel.hasSorting"
+        [sortOrder]="_sortColumn === header ? _sortOrder : _sortOrderNone"
+        (sortClicked)="sortClickHandler($event, header)"
+      ></app-sort-button>
     </th>
     <th *ngIf="tableModel.hasAddNew">
       <app-add-button></app-add-button>

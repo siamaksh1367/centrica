@@ -16,6 +16,7 @@ import { AddButtonComponent } from './components/base/add-button/add-button.comp
 import { SortButtonComponent } from './components/base/sort-button/sort-button.component';
 import { ExpandButtonComponent } from './components/base/expand-button/expand-button.component';
 import { CollapseButtonComponent } from './components/base/collapse-button/collapse-button.component';
+import { CommonService } from './services/common.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CollapseButtonComponent } from './components/base/collapse-button/colla
     ApiHttpService,
     Constants,
     ApiEndpointsService,
+    CommonService,
   ],
   bootstrap: [AppComponent],
 })

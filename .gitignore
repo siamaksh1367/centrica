@@ -479,3 +479,4 @@ testem.log
 *.hmr
 .e2e/
 *.e2e
+.angular/cache/

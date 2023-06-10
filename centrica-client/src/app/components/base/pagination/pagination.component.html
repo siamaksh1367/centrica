@@ -1,27 +1,33 @@
-<nav aria-label="...">
-  <ul class="pagination">
-    <li
-      class="page-item"
-      [ngClass]="{ disabled: _previousDisable }"
-      (click)="previousClickHandler($event)"
-    >
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li
-      *ngFor="let i of _shownPages"
-      class="page-item"
-      [ngClass]="{ active: i === selectedPage }"
-      aria-current="page"
-      (click)="pageChangeHandler($event, i)"
-    >
-      <a class="page-link" href="#">{{ i }}</a>
-    </li>
-    <li
-      class="page-item"
-      [ngClass]="{ disabled: _nextDisable }"
-      (click)="nextClickHandler($event)"
-    >
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
+<div class="d-flex align-items-center justify-content-center m0">
+  <nav aria-label="...">
+    <ul class="pagination">
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: _previousDisable }"
+        (click)="previousClickHandler()"
+      >
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li
+        *ngFor="let i of _shownPages"
+        class="page-item"
+        [ngClass]="{ active: i === selectedPage }"
+        aria-current="page"
+        (click)="pageChangeHandler(i)"
+      >
+        <a class="page-link" href="#">{{ i }}</a>
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: _nextDisable }"
+        (click)="nextClickHandler()"
+      >
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+  <app-select
+    [options]="_pagination"
+    (selectedChanged)="pageSizeChangedHandler($event)"
+  ></app-select>
+</div>

@@ -18,6 +18,8 @@ import { ExpandButtonComponent } from './components/base/expand-button/expand-bu
 import { CollapseButtonComponent } from './components/base/collapse-button/collapse-button.component';
 import { CommonService } from './services/common.service';
 import { PaginationComponent } from './components/base/pagination/pagination.component';
+import { SelectComponent } from './components/base/select/select.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,15 @@ import { PaginationComponent } from './components/base/pagination/pagination.com
     ExpandButtonComponent,
     CollapseButtonComponent,
     PaginationComponent,
+    SelectComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, NgbModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+  ],
   providers: [
     { provide: DISTRICT_SERVICE_TOKEN, useClass: DistrictServiceMoq },
     ApiHttpService,

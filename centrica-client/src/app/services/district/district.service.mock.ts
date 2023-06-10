@@ -16,6 +16,21 @@ export class DistrictServiceMoq implements IDistrictService {
       { id: 1, name: 'District A' },
       { id: 2, name: 'District B' },
       { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
+      { id: 3, name: 'District C' },
     ];
 
     // Return the dummy data as an observable

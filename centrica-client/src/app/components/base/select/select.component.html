@@ -1,0 +1,9 @@
+<select [(ngModel)]="_selectedOption" (change)="changeHandler()">
+  <option
+    *ngFor="let option of _indexedOptions"
+    [selected]="option.id == _selectedOption"
+    [value]="option.id"
+  >
+    {{ option.title }}
+  </option>
+</select>

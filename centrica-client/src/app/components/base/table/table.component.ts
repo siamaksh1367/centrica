@@ -7,7 +7,6 @@ import { CommonService } from './../../../services/common.service';
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
-  template: ``,
 })
 export class TableComponent<T extends object> {
   @Input() tableModel!: TableModel<T>;
@@ -16,14 +15,22 @@ export class TableComponent<T extends object> {
   _sortColumn: string = '';
   _sortOrder: SortOrders = SortOrders.None;
   readonly _sortOrderNone: SortOrders = SortOrders.None;
+  _pageSize: number = 3;
+  _pageNumber: number = 1;
+  _shownItem: T[] = [];
 
-  /**
-   *
-   */
   constructor(private common: CommonService) {}
   ngOnInit() {
     if (this.tableModel.items) {
       this._headers = Object.keys(this.tableModel?.items[0]);
+    }
+    if (this.tableModel.hasPaging) {
+      this._shownItem = this.tableModel.items.slice(
+        this._pageNumber * this._pageSize,
+        this._pageSize
+      );
+    } else {
+      this._shownItem = this.tableModel.items;
     }
   }
   sortClickHandler(sortOrder: SortOrders, header: string) {
@@ -39,5 +46,10 @@ export class TableComponent<T extends object> {
   }
   trackByFn(index: number, item: T): any {
     return index;
+  }
+
+  pagingChanged(pageSize: number) {
+    this._pageSize = pageSize;
+    console.log(this._pageSize);
   }
 }

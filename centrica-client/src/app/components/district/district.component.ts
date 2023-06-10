@@ -19,8 +19,6 @@ export class DistrictComponent {
     hasHeader: true,
     hasPaging: true,
     items: [],
-    clientSidePaging: true,
-    serveSidePaging: false,
     hasAddNew: true,
     hasSorting: true,
   };

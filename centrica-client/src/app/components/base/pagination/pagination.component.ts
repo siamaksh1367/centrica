@@ -1,5 +1,4 @@
-import { getLocaleMonthNames } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -7,27 +6,27 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent {
-  @Input() pageCount: number = 1;
-  @Input() selectedPage: number = 1;
-  @Input() shownPagesCount: number = 3;
+  @Input('pageCount') pageCount: number = 1;
+  @Input('selectedPage') selectedPage: number = 1;
+  @Output('pageSizeChanged') pageSizeChanged = new EventEmitter<number>();
   private readonly starting: number = 1;
   _shownPages: number[] = [];
   _nextDisable: boolean = false;
   _previousDisable: boolean = false;
   _starPage: number = 1;
   _endPage: number = this.pageCount;
-
+  _shownPagesCount: number = 3;
+  _pagination: number[] = [1, 3, 5];
   ngOnInit() {
     this._shownPages = [];
     this._nextDisable = false;
     this._previousDisable = false;
     this._starPage = 1;
-    this.shownPagesCount = Math.min(this.shownPagesCount, this.pageCount);
-    this._endPage = this.shownPagesCount;
+    this._endPage = this._shownPagesCount;
     this.assignShownPage(1);
   }
 
-  pageChangeHandler($event: any, newPageNumber: number) {
+  pageChangeHandler(newPageNumber: number) {
     this.assignShownPage(newPageNumber);
   }
   assignShownPage(newPageNumber: number) {
@@ -43,26 +42,29 @@ export class PaginationComponent {
     } else this._previousDisable = false;
     this.selectedPage = newPageNumber;
   }
-  previousClickHandler($event: any) {
+  previousClickHandler() {
     this._starPage = Math.max(
       this.starting,
-      this._starPage - this.shownPagesCount
+      this._starPage - this._shownPagesCount
     );
     this._endPage = Math.min(
       this.pageCount,
-      this._starPage + this.shownPagesCount - 1
+      this._starPage + this._shownPagesCount - 1
     );
     this.assignShownPage(this._endPage);
   }
-  nextClickHandler($event: any) {
+  nextClickHandler() {
     this._endPage = Math.min(
       this.pageCount,
-      this._endPage + this.shownPagesCount
+      this._endPage + this._shownPagesCount
     );
     this._starPage = Math.max(
       this.starting,
-      this._endPage - this.shownPagesCount + 1
+      this._endPage - this._shownPagesCount + 1
     );
     this.assignShownPage(this._starPage);
+  }
+  pageSizeChangedHandler(newSize: number) {
+    this.pageSizeChanged.emit(newSize);
   }
 }

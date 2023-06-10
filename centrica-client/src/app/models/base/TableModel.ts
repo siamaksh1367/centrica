@@ -3,7 +3,5 @@ export interface TableModel<T> {
   hasPaging: boolean;
   hasSorting: boolean;
   hasAddNew: boolean;
-  serveSidePaging: boolean;
-  clientSidePaging: boolean;
   items: T[];
 }

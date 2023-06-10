@@ -1,12 +1,6 @@
 <app-table [tableModel]="districtTableData" [rowTemplate]="districtRow">
 </app-table>
-<app-pagination
-  [pageCount]="50"
-  [selectedPage]="1"
-  [shownPagesCount]="6"
-></app-pagination>
 <ng-template #districtRow let-district>
   <td>{{ district.id }}</td>
   <td>{{ district.name }}</td>
-  <!-- Add more columns as needed -->
 </ng-template>

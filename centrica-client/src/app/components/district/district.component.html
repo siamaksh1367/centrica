@@ -1,6 +1,9 @@
 <app-table [tableModel]="districtTableData" [rowTemplate]="districtRow">
 </app-table>
 <ng-template #districtRow let-district>
-  <td>{{ district.id }}</td>
-  <td>{{ district.name }}</td>
+  <tr>
+    <td>{{ district.id }}</td>
+    <td>{{ district.name }}</td>
+    <td></td>
+  </tr>
 </ng-template>

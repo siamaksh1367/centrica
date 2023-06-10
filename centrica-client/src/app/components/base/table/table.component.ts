@@ -27,16 +27,9 @@ export class TableComponent<T extends object> {
   }
 
   sortClickHandler(sortOrder: SortOrders, header: string) {
-    this._sortOrder = sortOrder;
-    this._sortColumn = header;
-    if (this._sortOrder !== SortOrders.None) {
-      this._shownItem = this.common.sortList(
-        this._shownItem,
-        header,
-        this._sortOrder == SortOrders.Ascending
-      );
-    }
+    this.sortShownItems(sortOrder, header);
   }
+
   trackByFn(index: number, item: T): any {
     return index;
   }
@@ -50,6 +43,17 @@ export class TableComponent<T extends object> {
     this._selectedPageNumber = 1;
     this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
     this.limitItems();
+  }
+  private sortShownItems(sortOrder: SortOrders, header: string) {
+    this._sortOrder = sortOrder;
+    this._sortColumn = header;
+    if (this._sortOrder !== SortOrders.None) {
+      this._shownItem = this.common.sortList(
+        this._shownItem,
+        header,
+        this._sortOrder == SortOrders.Ascending
+      );
+    }
   }
 
   private pagingConfigure() {

@@ -22,24 +22,16 @@ export class TableComponent<T extends object> {
 
   constructor(private common: CommonService) {}
   ngOnInit() {
-    if (this.tableModel.items) {
-      this._headers = Object.keys(this.tableModel?.items[0]);
-    }
-    if (this.tableModel.hasPaging) {
-      this._shownItem = this.tableModel.items.slice(
-        (this._selectedPageNumber - 1) * this._pageSize,
-        this._pageSize
-      );
-    } else {
-      this._shownItem = this.tableModel.items;
-    }
+    this.hetHeaders();
+    this.pagingConfigure();
   }
+
   sortClickHandler(sortOrder: SortOrders, header: string) {
     this._sortOrder = sortOrder;
     this._sortColumn = header;
     if (this._sortOrder !== SortOrders.None) {
-      this.tableModel.items = this.common.sortList(
-        this.tableModel?.items,
+      this._shownItem = this.common.sortList(
+        this._shownItem,
         header,
         this._sortOrder == SortOrders.Ascending
       );
@@ -50,8 +42,33 @@ export class TableComponent<T extends object> {
   }
 
   pageSizeChangedHandler(pageSize: number) {
+    this.updatePaging(pageSize);
+  }
+
+  private updatePaging(pageSize: number) {
     this._pageSize = pageSize;
     this._selectedPageNumber = 1;
-    this._pageCount = this.tableModel.items.length;
+    this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
+    this.limitItems();
+  }
+
+  private pagingConfigure() {
+    if (this.tableModel.hasPaging) {
+      this.limitItems();
+    } else {
+      this._shownItem = this.tableModel.items;
+    }
+  }
+
+  private hetHeaders() {
+    if (this.tableModel.items) {
+      this._headers = Object.keys(this.tableModel?.items[0]);
+    }
+  }
+  private limitItems() {
+    this._shownItem = this.tableModel.items.slice(
+      (this._selectedPageNumber - 1) * this._pageSize,
+      this._pageSize
+    );
   }
 }

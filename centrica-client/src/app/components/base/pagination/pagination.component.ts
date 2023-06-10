@@ -9,6 +9,9 @@ export class PaginationComponent {
   @Input('pageSize') pageSize: number = 1;
   @Input('pageCount') pageCount: number = 1;
   @Input('selectedPageNumber') selectedPageNumber: number = 1;
+  @Input('showPageCount') showPageCount: number = 3;
+  @Input('pagination') pagination: number[] = [1, 5, 10];
+
   @Output('pageSizeChanged') pageSizeChanged = new EventEmitter<number>();
   private readonly starting: number = 1;
   _shownPages: number[] = [];
@@ -16,14 +19,12 @@ export class PaginationComponent {
   _previousDisable: boolean = false;
   _starPage: number = 1;
   _endPage: number = this.pageCount;
-  _shownPagesCount: number = 3;
-  _pagination: number[] = [1, 3, 5];
   ngOnInit() {
     this._shownPages = [];
     this._nextDisable = false;
     this._previousDisable = false;
     this._starPage = 1;
-    this._endPage = this._shownPagesCount;
+    this._endPage = this.showPageCount;
     this.assignShownPage(1);
   }
 
@@ -46,22 +47,22 @@ export class PaginationComponent {
   previousClickHandler() {
     this._starPage = Math.max(
       this.starting,
-      this._starPage - this._shownPagesCount
+      this._starPage - this.showPageCount
     );
     this._endPage = Math.min(
       this.pageCount,
-      this._starPage + this._shownPagesCount - 1
+      this._starPage + this.showPageCount - 1
     );
     this.assignShownPage(this._endPage);
   }
   nextClickHandler() {
     this._endPage = Math.min(
       this.pageCount,
-      this._endPage + this._shownPagesCount
+      this._endPage + this.showPageCount
     );
     this._starPage = Math.max(
       this.starting,
-      this._endPage - this._shownPagesCount + 1
+      this._endPage - this.showPageCount + 1
     );
     this.assignShownPage(this._starPage);
   }

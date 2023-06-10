@@ -27,7 +27,8 @@
     </ul>
   </nav>
   <app-select
-    [options]="_pagination"
+    [options]="pagination"
+    [initialItemIndex]="2"
     (selectedChanged)="pageSizeChangedHandler($event)"
   ></app-select>
 </div>

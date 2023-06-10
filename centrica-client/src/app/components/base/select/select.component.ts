@@ -9,18 +9,20 @@ import { SelectModel } from 'src/app/models/SelectModel';
 export class SelectComponent<T> {
   @Input('options') options!: T[];
   @Input('shownField') shownField: string = '';
-  @Input('initialItemIndex') initialItemIndex: number = 1;
+  @Input('initialItemIndex') initialItemIndex: number = 2;
   @Output('selectedChanged') selectedChanged = new EventEmitter<T>();
   _selectedOption!: number;
   _indexedOptions: SelectModel<T>[] = [];
 
   ngOnInit() {
-    let index = this.initialItemIndex ? this.initialItemIndex : 1;
+    let index = 1;
+
     this._indexedOptions = this.options.map((data) => ({
       id: index++,
       data: data,
       title: this.processObject(data),
     }));
+    this._selectedOption = this.initialItemIndex;
   }
 
   processObject(obj: T): string {

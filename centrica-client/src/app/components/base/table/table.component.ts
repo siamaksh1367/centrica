@@ -15,7 +15,7 @@ export class TableComponent<T extends object> {
   _sortColumn: string = '';
   _sortOrder: SortOrders = SortOrders.None;
   readonly _sortOrderNone: SortOrders = SortOrders.None;
-  _pageSize: number = 3;
+  _pageSize: number = 5;
   _selectedPageNumber: number = 1;
   _pageCount: number = 1;
   _shownItem: T[] = [];
@@ -35,12 +35,16 @@ export class TableComponent<T extends object> {
   }
 
   pageSizeChangedHandler(pageSize: number) {
+    this._selectedPageNumber = 1;
     this.updatePaging(pageSize);
+  }
+  pageNumberChangedHandler(pageNumber: number) {
+    this._selectedPageNumber = pageNumber;
+    this.updatePaging(this._pageSize);
   }
 
   private updatePaging(pageSize: number) {
     this._pageSize = pageSize;
-    this._selectedPageNumber = 1;
     this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
     this.limitItems();
   }
@@ -62,6 +66,7 @@ export class TableComponent<T extends object> {
     } else {
       this._shownItem = this.tableModel.items;
     }
+    this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
   }
 
   private hetHeaders() {
@@ -72,7 +77,7 @@ export class TableComponent<T extends object> {
   private limitItems() {
     this._shownItem = this.tableModel.items.slice(
       (this._selectedPageNumber - 1) * this._pageSize,
-      this._pageSize
+      this._selectedPageNumber * this._pageSize
     );
   }
 }

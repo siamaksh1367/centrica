@@ -25,8 +25,8 @@
 </table>
 <app-pagination
   *ngIf="tableModel.hasPaging"
-  [pageSize]="_pageSize"
   [pageCount]="_pageCount"
   [selectedPageNumber]="_selectedPageNumber"
   (pageSizeChanged)="pageSizeChangedHandler($event)"
+  (pageNumberChanged)="pageNumberChangedHandler($event)"
 ></app-pagination>

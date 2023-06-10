@@ -1,6 +1,10 @@
 <nav aria-label="...">
   <ul class="pagination">
-    <li class="page-item" [ngClass]="{ disabled: _previousAvailable }">
+    <li
+      class="page-item"
+      [ngClass]="{ disabled: _previousDisable }"
+      (click)="previousClickHandler($event)"
+    >
       <a class="page-link" href="#" tabindex="-1">Previous</a>
     </li>
     <li
@@ -12,7 +16,11 @@
     >
       <a class="page-link" href="#">{{ i }}</a>
     </li>
-    <li class="page-item" [ngClass]="{ disabled: _nextAvailable }">
+    <li
+      class="page-item"
+      [ngClass]="{ disabled: _nextDisable }"
+      (click)="nextClickHandler($event)"
+    >
       <a class="page-link" href="#">Next</a>
     </li>
   </ul>

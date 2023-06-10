@@ -12,59 +12,57 @@ export class PaginationComponent {
   @Input() shownPagesCount: number = 3;
   private readonly starting: number = 1;
   _shownPages: number[] = [];
-  _nextAvailable: boolean = false;
-  _previousAvailable: boolean = false;
+  _nextDisable: boolean = false;
+  _previousDisable: boolean = false;
   _starPage: number = 1;
   _endPage: number = this.pageCount;
 
   ngOnInit() {
     this._shownPages = [];
-    this._nextAvailable = false;
-    this._previousAvailable = false;
+    this._nextDisable = false;
+    this._previousDisable = false;
     this._starPage = 1;
-    this._endPage = this.shownPagesCount;
-
     this.shownPagesCount = Math.min(this.shownPagesCount, this.pageCount);
-
-    this.assignShownPage();
-
-    if (this._shownPages.includes(this.pageCount)) {
-      this._nextAvailable = true;
-    }
-    if (this._shownPages.includes(this.starting)) {
-      this._previousAvailable = true;
-    }
+    this._endPage = this.shownPagesCount;
+    this.assignShownPage(1);
   }
 
   pageChangeHandler($event: any, newPageNumber: number) {
-    if (newPageNumber > this.selectedPage) {
-      this._endPage = Math.min(
-        this.pageCount,
-        newPageNumber + Math.ceil(this.shownPagesCount / 2)
-      );
-      this._starPage = Math.max(
-        this.starting,
-        this._endPage - this.shownPagesCount
-      );
-    }
-    if (newPageNumber < this.selectedPage) {
-      this._starPage = Math.max(
-        this.starting,
-        newPageNumber - Math.floor(this.shownPagesCount / 2)
-      );
-      this._endPage = Math.min(
-        this.pageCount,
-        this._starPage + this.shownPagesCount
-      );
-    }
-    this.selectedPage = newPageNumber;
-    this.assignShownPage();
+    this.assignShownPage(newPageNumber);
   }
-  assignShownPage() {
+  assignShownPage(newPageNumber: number) {
     this._shownPages = [];
     for (let i = this._starPage; i < this._endPage + 1; i++) {
       this._shownPages.push(i);
     }
-    console.log(this._shownPages);
+    if (this._shownPages.includes(this.pageCount)) {
+      this._nextDisable = true;
+    } else this._nextDisable = false;
+    if (this._shownPages.includes(this.starting)) {
+      this._previousDisable = true;
+    } else this._previousDisable = false;
+    this.selectedPage = newPageNumber;
+  }
+  previousClickHandler($event: any) {
+    this._starPage = Math.max(
+      this.starting,
+      this._starPage - this.shownPagesCount
+    );
+    this._endPage = Math.min(
+      this.pageCount,
+      this._starPage + this.shownPagesCount - 1
+    );
+    this.assignShownPage(this._endPage);
+  }
+  nextClickHandler($event: any) {
+    this._endPage = Math.min(
+      this.pageCount,
+      this._endPage + this.shownPagesCount
+    );
+    this._starPage = Math.max(
+      this.starting,
+      this._endPage - this.shownPagesCount + 1
+    );
+    this.assignShownPage(this._starPage);
   }
 }

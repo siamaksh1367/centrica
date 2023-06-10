@@ -22,8 +22,8 @@ export class TableComponent<T extends object> {
    */
   constructor(private common: CommonService) {}
   ngOnInit() {
-    if (this.tableModel && this.tableModel.items) {
-      this._headers = Object.keys(this.tableModel.items[0]);
+    if (this.tableModel.items) {
+      this._headers = Object.keys(this.tableModel?.items[0]);
     }
   }
   sortClickHandler(sortOrder: SortOrders, header: string) {
@@ -31,7 +31,7 @@ export class TableComponent<T extends object> {
     this._sortColumn = header;
     if (this._sortOrder !== SortOrders.None) {
       this.tableModel.items = this.common.sortList(
-        this.tableModel.items,
+        this.tableModel?.items,
         header,
         this._sortOrder == SortOrders.Ascending
       );

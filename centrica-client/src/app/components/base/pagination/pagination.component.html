@@ -1,0 +1,19 @@
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{ disabled: _previousAvailable }">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li
+      *ngFor="let i of _shownPages"
+      class="page-item"
+      [ngClass]="{ active: i === selectedPage }"
+      aria-current="page"
+      (click)="pageChangeHandler($event, i)"
+    >
+      <a class="page-link" href="#">{{ i }}</a>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: _nextAvailable }">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>

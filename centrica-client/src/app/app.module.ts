@@ -17,6 +17,7 @@ import { SortButtonComponent } from './components/base/sort-button/sort-button.c
 import { ExpandButtonComponent } from './components/base/expand-button/expand-button.component';
 import { CollapseButtonComponent } from './components/base/collapse-button/collapse-button.component';
 import { CommonService } from './services/common.service';
+import { PaginationComponent } from './components/base/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CommonService } from './services/common.service';
     SortButtonComponent,
     ExpandButtonComponent,
     CollapseButtonComponent,
+    PaginationComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, NgbModule],
   providers: [

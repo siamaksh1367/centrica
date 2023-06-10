@@ -480,3 +480,4 @@ testem.log
 .e2e/
 *.e2e
 .angular/cache/
+/centrica-client/.angular/

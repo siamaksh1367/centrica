@@ -16,7 +16,8 @@ export class TableComponent<T extends object> {
   _sortOrder: SortOrders = SortOrders.None;
   readonly _sortOrderNone: SortOrders = SortOrders.None;
   _pageSize: number = 3;
-  _pageNumber: number = 1;
+  _selectedPageNumber: number = 1;
+  _pageCount: number = 1;
   _shownItem: T[] = [];
 
   constructor(private common: CommonService) {}
@@ -26,7 +27,7 @@ export class TableComponent<T extends object> {
     }
     if (this.tableModel.hasPaging) {
       this._shownItem = this.tableModel.items.slice(
-        this._pageNumber * this._pageSize,
+        (this._selectedPageNumber - 1) * this._pageSize,
         this._pageSize
       );
     } else {
@@ -48,8 +49,9 @@ export class TableComponent<T extends object> {
     return index;
   }
 
-  pagingChanged(pageSize: number) {
+  pageSizeChangedHandler(pageSize: number) {
     this._pageSize = pageSize;
-    console.log(this._pageSize);
+    this._selectedPageNumber = 1;
+    this._pageCount = this.tableModel.items.length;
   }
 }

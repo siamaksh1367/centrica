@@ -6,8 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent {
+  @Input('pageSize') pageSize: number = 1;
   @Input('pageCount') pageCount: number = 1;
-  @Input('selectedPage') selectedPage: number = 1;
+  @Input('selectedPageNumber') selectedPageNumber: number = 1;
   @Output('pageSizeChanged') pageSizeChanged = new EventEmitter<number>();
   private readonly starting: number = 1;
   _shownPages: number[] = [];
@@ -40,7 +41,7 @@ export class PaginationComponent {
     if (this._shownPages.includes(this.starting)) {
       this._previousDisable = true;
     } else this._previousDisable = false;
-    this.selectedPage = newPageNumber;
+    this.selectedPageNumber = newPageNumber;
   }
   previousClickHandler() {
     this._starPage = Math.max(

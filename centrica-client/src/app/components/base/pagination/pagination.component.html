@@ -11,7 +11,7 @@
       <li
         *ngFor="let i of _shownPages"
         class="page-item"
-        [ngClass]="{ active: i === selectedPage }"
+        [ngClass]="{ active: i === selectedPageNumber }"
         aria-current="page"
         (click)="pageChangeHandler(i)"
       >

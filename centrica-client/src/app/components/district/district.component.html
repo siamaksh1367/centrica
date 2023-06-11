@@ -1,4 +1,8 @@
-<app-table [tableModel]="districtTableData" [rowTemplate]="districtRow">
+<app-table
+  [tableModel]="districtTableData"
+  [rowTemplate]="districtRow"
+  [collapseId]="'districtAddRow'"
+>
   <app-district-new-row></app-district-new-row>
 </app-table>
 <ng-template #districtRow let-district>

@@ -9,8 +9,9 @@ import { CommonService } from './../../../services/common.service';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent<T extends object> {
-  @Input() tableModel!: TableModel<T>;
-  @Input() rowTemplate: any;
+  @Input('tableModel') tableModel!: TableModel<T>;
+  @Input('rowTemplate') rowTemplate: any;
+  @Input('collapseId') collapseId: string = '';
   _headers: string[] = [];
   _sortColumn: string = '';
   _sortOrder: SortOrders = SortOrders.None;

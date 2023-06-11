@@ -1,37 +1,39 @@
-<table class="table">
-  <thead *ngIf="tableModel.hasHeader">
-    <tr>
-      <th *ngFor="let header of _headers">
-        {{ header }}
-        <app-sort-button
-          *ngIf="tableModel.hasSorting"
-          [sortOrder]="_sortColumn === header ? _sortOrder : _sortOrderNone"
-          (sortClicked)="sortClickHandler($event, header)"
-        ></app-sort-button>
-      </th>
-      <th *ngIf="tableModel.hasAddNew">
-        <app-add-button [targetCollapse]="'collapseExample'"></app-add-button>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container
-      *ngFor="let item of _shownItem; trackBy: trackByFn"
-      [ngTemplateOutlet]="rowTemplate"
-      [ngTemplateOutletContext]="{ $implicit: item }"
-    >
-    </ng-container>
-    <tr class="collapse" id="collapseExample">
-      <td colspan="3">
-        <ng-content></ng-content>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<app-pagination
-  *ngIf="tableModel.hasPaging"
-  [pageCount]="_pageCount"
-  [selectedPageNumber]="_selectedPageNumber"
-  (pageSizeChanged)="pageSizeChangedHandler($event)"
-  (pageNumberChanged)="pageNumberChangedHandler($event)"
-></app-pagination>
+<div class="p-5">
+  <table class="table">
+    <thead *ngIf="tableModel.hasHeader">
+      <tr>
+        <th *ngFor="let header of _headers">
+          {{ header }}
+          <app-sort-button
+            *ngIf="tableModel.hasSorting"
+            [sortOrder]="_sortColumn === header ? _sortOrder : _sortOrderNone"
+            (sortClicked)="sortClickHandler($event, header)"
+          ></app-sort-button>
+        </th>
+        <th *ngIf="tableModel.hasAddNew">
+          <app-add-button [targetCollapse]="collapseId"></app-add-button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container
+        *ngFor="let item of _shownItem; trackBy: trackByFn"
+        [ngTemplateOutlet]="rowTemplate"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      >
+      </ng-container>
+      <tr class="collapse" [id]="collapseId">
+        <td colspan="3">
+          <ng-content></ng-content>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination
+    *ngIf="tableModel.hasPaging"
+    [pageCount]="_pageCount"
+    [selectedPageNumber]="_selectedPageNumber"
+    (pageSizeChanged)="pageSizeChangedHandler($event)"
+    (pageNumberChanged)="pageNumberChangedHandler($event)"
+  ></app-pagination>
+</div>

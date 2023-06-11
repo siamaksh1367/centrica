@@ -1,4 +1,8 @@
-<select [(ngModel)]="_selectedOption" (change)="changeHandler()">
+<select
+  class="form-select"
+  [(ngModel)]="_selectedOption"
+  (change)="changeHandler()"
+>
   <option
     *ngFor="let option of _indexedOptions"
     [selected]="option.id === _selectedOption"

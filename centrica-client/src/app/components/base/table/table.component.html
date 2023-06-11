@@ -23,7 +23,7 @@
       >
       </ng-container>
       <tr class="collapse" [id]="collapseId">
-        <td colspan="3">
+        <td [attr.colspan]="_headers.length + 1">
           <ng-content></ng-content>
         </td>
       </tr>

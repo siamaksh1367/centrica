@@ -14,8 +14,6 @@ import { DistrictService } from './services/district/district.service';
 import { DistrictServiceMoq } from './services/district/district.service.mock';
 import { AddButtonComponent } from './components/base/add-button/add-button.component';
 import { SortButtonComponent } from './components/base/sort-button/sort-button.component';
-import { ExpandButtonComponent } from './components/base/expand-button/expand-button.component';
-import { CollapseButtonComponent } from './components/base/collapse-button/collapse-button.component';
 import { CommonService } from './services/common.service';
 import { PaginationComponent } from './components/base/pagination/pagination.component';
 import { SelectComponent } from './components/base/select/select.component';
@@ -30,8 +28,6 @@ import { NavPillComponent } from './components/base/nav-pill/nav-pill.component'
     TableComponent,
     AddButtonComponent,
     SortButtonComponent,
-    ExpandButtonComponent,
-    CollapseButtonComponent,
     PaginationComponent,
     SelectComponent,
     DistrictNewRowComponent,

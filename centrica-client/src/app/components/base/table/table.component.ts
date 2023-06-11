@@ -19,11 +19,14 @@ export class TableComponent<T extends object> {
   _pageSize: number = 5;
   _selectedPageNumber: number = 1;
   _pageCount: number = 1;
-  _shownItem: T[] = [];
 
   constructor(private common: CommonService) {}
   ngOnInit() {
-    this.hetHeaders();
+    this.getHeaders();
+    this.pagingConfigure();
+  }
+  ngOnChanges() {
+    this.getHeaders();
     this.pagingConfigure();
   }
 
@@ -47,14 +50,13 @@ export class TableComponent<T extends object> {
   private updatePaging(pageSize: number) {
     this._pageSize = pageSize;
     this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
-    this.limitItems();
   }
   private sortShownItems(sortOrder: SortOrders, header: string) {
     this._sortOrder = sortOrder;
     this._sortColumn = header;
     if (this._sortOrder !== SortOrders.None) {
-      this._shownItem = this.common.sortList(
-        this._shownItem,
+      this.tableModel.items = this.common.sortList(
+        this.tableModel.items,
         header,
         this._sortOrder == SortOrders.Ascending
       );
@@ -62,23 +64,12 @@ export class TableComponent<T extends object> {
   }
 
   private pagingConfigure() {
-    if (this.tableModel.hasPaging) {
-      this.limitItems();
-    } else {
-      this._shownItem = this.tableModel.items;
-    }
     this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
   }
 
-  private hetHeaders() {
+  private getHeaders() {
     if (this.tableModel.items) {
       this._headers = Object.keys(this.tableModel?.items[0]);
     }
-  }
-  private limitItems() {
-    this._shownItem = this.tableModel.items.slice(
-      (this._selectedPageNumber - 1) * this._pageSize,
-      this._selectedPageNumber * this._pageSize
-    );
   }
 }

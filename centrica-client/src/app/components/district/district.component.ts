@@ -1,15 +1,8 @@
-import {
-  ApplicationRef,
-  Component,
-  Inject,
-  Injectable,
-  Type,
-} from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { DistrictModel } from 'src/app/models/DistrictModel';
 import { TableModel } from 'src/app/models/base/TableModel';
 import { DistrictService } from 'src/app/services/district/district.service';
 import { ToastrService } from 'ngx-toastr';
-import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-district',
   templateUrl: './district.component.html',
@@ -19,8 +12,7 @@ import { ChangeDetectorRef } from '@angular/core';
 export class DistrictComponent {
   constructor(
     private service: DistrictService,
-    private toastr: ToastrService,
-    private appRef: ApplicationRef
+    private toastr: ToastrService
   ) {}
   districtTableData: TableModel<DistrictModel> = {
     hasHeader: true,
@@ -31,6 +23,7 @@ export class DistrictComponent {
   };
   stage = '';
   expandedRow = 0;
+  _render: boolean = true;
   ngOnInit() {
     this.service
       .get()
@@ -44,7 +37,7 @@ export class DistrictComponent {
     this.service.post(districtModel).subscribe(
       (x) => {
         this.toastr.success('Success message', 'Success');
-        this.appRef.tick();
+        this.districtTableData = { ...this.districtTableData };
       },
       (x) => {
         this.toastr.error('Failed message', 'Failed');

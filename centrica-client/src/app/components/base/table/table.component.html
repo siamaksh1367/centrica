@@ -18,7 +18,13 @@
     </thead>
     <tbody>
       <ng-container
-        *ngFor="let item of _shownItem; trackBy: trackByFn"
+        *ngFor="
+          let item of tableModel.items.slice(
+            (_selectedPageNumber - 1) * _pageSize,
+            _selectedPageNumber * _pageSize
+          );
+          trackBy: trackByFn
+        "
         [ngTemplateOutlet]="rowTemplate"
         [ngTemplateOutletContext]="{ $implicit: item }"
       >
@@ -33,8 +39,6 @@
   <app-pagination
     *ngIf="tableModel.hasPaging"
     [pageCount]="_pageCount"
-    [totalCount]="tableModel.items.length"
-    [pageSize]="pageSize"
     [selectedPageNumber]="_selectedPageNumber"
     (pageSizeChanged)="pageSizeChangedHandler($event)"
     (pageNumberChanged)="pageNumberChangedHandler($event)"

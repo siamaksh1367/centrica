@@ -8,13 +8,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class PaginationComponent {
   @Input('pageCount') pageCount: number = 1;
   @Input('selectedPageNumber') selectedPageNumber: number = 1;
-  @Input('pagination') pagination: number[] = [1, 5, 10, 20];
   @Output('pageSizeChanged') pageSizeChanged = new EventEmitter<number>();
   @Output('pageNumberChanged') pageNumberChanged = new EventEmitter<number>();
-  _nextDisable: boolean = true;
-  _previousDisable: boolean = false;
+  _nextDisable: boolean = false;
+  _previousDisable: boolean = true;
+
   ngOnInit() {
-    this._nextDisable = false;
+    this._nextDisable = true;
     this._previousDisable = false;
   }
 

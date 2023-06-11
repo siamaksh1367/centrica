@@ -23,9 +23,8 @@
   </nav>
   <span> Of {{ pageCount }} of Size</span>
   <app-select
-    [options]="pagination"
-    [initialItemIndex]="2"
+    [options]="[1, 3, 5, 10]"
+    [initialItemIndex]="3"
     (selectedChanged)="pageSizeChangedHandler($event)"
   ></app-select>
-  <span> {{ totalCount }} in total</span>
 </div>

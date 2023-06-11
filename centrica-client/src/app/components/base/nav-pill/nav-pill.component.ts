@@ -9,4 +9,5 @@ export class NavPillComponent {
   @Input() stages: string[] = [];
   @Input() districtId: number = 0;
   @Output() stageChanged = new EventEmitter<string>();
+  open: boolean = false;
 }

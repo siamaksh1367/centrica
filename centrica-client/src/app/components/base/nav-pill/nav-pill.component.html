@@ -4,8 +4,17 @@
       class="nav-link"
       style="cursor: pointer"
       data-toggle="pill"
-      (click)="stageChanged.emit(stage)"
+      (click)="stageChanged.emit(stage); open = true"
       >{{ stage }}</a
+    >
+  </li>
+  <li class="nav nav-item" *ngIf="open === true">
+    <a
+      class="nav-link"
+      style="cursor: pointer"
+      data-toggle="pill"
+      (click)="stageChanged.emit(''); open = false"
+      >close</a
     >
   </li>
 </ul>

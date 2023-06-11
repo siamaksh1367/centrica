@@ -20,6 +20,6 @@
   <tr [ngSwitch]="stage" *ngIf="district.id === expandedRow">
     <td colspan="4" *ngSwitchCase="'sales'">Sales</td>
     <td colspan="4" *ngSwitchCase="'stores'">Stores</td>
-    <td *ngSwitchDefault></td>
+    <ng-container *ngSwitchDefault></ng-container>
   </tr>
 </ng-template>

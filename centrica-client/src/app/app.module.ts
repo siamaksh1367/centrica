@@ -19,7 +19,7 @@ import { CollapseButtonComponent } from './components/base/collapse-button/colla
 import { CommonService } from './services/common.service';
 import { PaginationComponent } from './components/base/pagination/pagination.component';
 import { SelectComponent } from './components/base/select/select.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DistrictNewRowComponent } from './components/district-new-row/district-new-row.component';
 import { NavPillComponent } from './components/base/nav-pill/nav-pill.component';
 
@@ -44,6 +44,7 @@ import { NavPillComponent } from './components/base/nav-pill/nav-pill.component'
     NgbModule,
     FormsModule,
     NgbCollapseModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: DISTRICT_SERVICE_TOKEN, useClass: DistrictServiceMoq },

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TableModel } from 'src/app/models/base/TableModel';
 import { SortOrders } from 'src/app/models/enum/SortOrders';
-import { CommonService } from './../../../services/common.service';
+import { CommonService } from '../../../services/common.service';
 
 @Component({
   selector: 'app-table',

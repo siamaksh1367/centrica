@@ -8,6 +8,6 @@ namespace centrica.datamodels
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<District> Districts { get; set; }
-        public ICollection<SalePerson> SalePeople { get; set; }
+        public ICollection<Store> Stores { get; set; }
     }
 }

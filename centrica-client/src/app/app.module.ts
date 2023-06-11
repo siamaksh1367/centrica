@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DistrictComponent } from './components/district/district.component';
-import { ApiHttpService } from './services/general/api-http.service';
 import { Constants } from './config/constant';
 import { TableComponent } from './components/base/table/table.component';
 import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DistrictNewRowComponent } from './components/district-new-row/district-new-row.component';
 import { NavPillComponent } from './components/base/nav-pill/nav-pill.component';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
+import { SalePersonComponent } from './components/sale-person/sale-person.component';
+import { StoreComponent } from './components/store/store.component';
+import { SalePersonNewRowComponent } from './components/base/sale-person-new-row/sale-person-new-row.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,9 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
     SelectComponent,
     DistrictNewRowComponent,
     NavPillComponent,
+    SalePersonComponent,
+    StoreComponent,
+    SalePersonNewRowComponent,
   ],
   imports: [
     BrowserModule,

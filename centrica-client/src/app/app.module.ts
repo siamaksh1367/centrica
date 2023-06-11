@@ -8,7 +8,7 @@ import { ApiHttpService } from './services/general/api-http.service';
 import { Constants } from './config/constant';
 import { ApiEndpointsService } from './services/general/api-endpoints.service';
 import { TableComponent } from './components/base/table/table.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DISTRICT_SERVICE_TOKEN } from './services/district/IDistrictService';
 import { DistrictService } from './services/district/district.service';
 import { DistrictServiceMoq } from './services/district/district.service.mock';
@@ -20,6 +20,7 @@ import { CommonService } from './services/common.service';
 import { PaginationComponent } from './components/base/pagination/pagination.component';
 import { SelectComponent } from './components/base/select/select.component';
 import { FormsModule } from '@angular/forms';
+import { DistrictNewRowComponent } from './components/district-new-row/district-new-row.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     CollapseButtonComponent,
     PaginationComponent,
     SelectComponent,
+    DistrictNewRowComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    NgbCollapseModule,
   ],
   providers: [
     { provide: DISTRICT_SERVICE_TOKEN, useClass: DistrictServiceMoq },

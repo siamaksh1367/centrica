@@ -1,3 +1,9 @@
-<button class="btn btn-danger rounded-circle">
+<button
+  class="btn btn-danger rounded-circle"
+  data-bs-toggle="collapse"
+  [attr.data-bs-target]="_targetCollapse"
+  aria-expanded="false"
+  [attr.aria-controls]="targetCollapse"
+>
   <i class="bi bi-plus"></i>
 </button>

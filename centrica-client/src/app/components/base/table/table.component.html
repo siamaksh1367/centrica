@@ -10,7 +10,7 @@
         ></app-sort-button>
       </th>
       <th *ngIf="tableModel.hasAddNew">
-        <app-add-button></app-add-button>
+        <app-add-button [targetCollapse]="'collapseExample'"></app-add-button>
       </th>
     </tr>
   </thead>
@@ -21,6 +21,11 @@
       [ngTemplateOutletContext]="{ $implicit: item }"
     >
     </ng-container>
+    <tr class="collapse" id="collapseExample">
+      <td colspan="3">
+        <ng-content></ng-content>
+      </td>
+    </tr>
   </tbody>
 </table>
 <app-pagination

@@ -3,7 +3,9 @@
   [rowTemplate]="districtRow"
   [collapseId]="'districtAddRow'"
 >
-  <app-district-new-row></app-district-new-row>
+  <app-district-new-row
+    (newItemAdded)="newItemAddedHandler($event)"
+  ></app-district-new-row>
 </app-table>
 <ng-template #districtRow let-district>
   <tr>

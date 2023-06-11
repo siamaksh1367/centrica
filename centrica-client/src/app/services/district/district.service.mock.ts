@@ -40,9 +40,9 @@ export class DistrictServiceMoq extends ApiHttpService<DistrictModel> {
   }
 
   public override post(data: DistrictModel): Observable<DistrictModel> {
-    let id = this.districts.length + 1;
-    this.districts.push({ id: id, name: data.name });
-    data.id = id;
+    console.log(this.districts);
+    data.id = this.districts.length + 1;
+    this.districts.push({ id: this.districts.length + 1, name: data.name });
     return of(data);
   }
 }

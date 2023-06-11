@@ -18,6 +18,7 @@ import { SelectComponent } from './components/base/select/select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DistrictNewRowComponent } from './components/district-new-row/district-new-row.component';
 import { NavPillComponent } from './components/base/nav-pill/nav-pill.component';
+import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { NavPillComponent } from './components/base/nav-pill/nav-pill.component'
     FormsModule,
     NgbCollapseModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    ToastNoAnimationModule.forRoot(),
   ],
   providers: [
     Constants,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-district-new-row',
@@ -6,13 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./district-new-row.component.css'],
 })
 export class DistrictNewRowComponent {
+  @Output() newItemAdded = new EventEmitter<string>();
   name: string = '';
 
   onSubmit() {
-    if (!this.name) {
-      return;
-    }
-
-    // Process the form submission
+    this.newItemAdded.emit(this.name);
   }
 }

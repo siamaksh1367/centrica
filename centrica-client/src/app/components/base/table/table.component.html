@@ -1,4 +1,5 @@
 <div class="p-5">
+  <span>total number of rows is : {{ tableModel.items.length }}</span>
   <table class="table">
     <thead *ngIf="tableModel.hasHeader">
       <tr>
@@ -32,6 +33,8 @@
   <app-pagination
     *ngIf="tableModel.hasPaging"
     [pageCount]="_pageCount"
+    [totalCount]="tableModel.items.length"
+    [pageSize]="pageSize"
     [selectedPageNumber]="_selectedPageNumber"
     (pageSizeChanged)="pageSizeChangedHandler($event)"
     (pageNumberChanged)="pageNumberChangedHandler($event)"

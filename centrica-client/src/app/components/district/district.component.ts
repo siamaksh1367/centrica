@@ -1,20 +1,16 @@
-import { Component, Inject, Type } from '@angular/core';
+import { Component, Inject, Injectable, Type } from '@angular/core';
 import { DistrictModel } from 'src/app/models/DistrictModel';
 import { TableModel } from 'src/app/models/base/TableModel';
-import {
-  DISTRICT_SERVICE_TOKEN,
-  IDistrictService,
-} from 'src/app/services/district/IDistrictService';
+import { DistrictService } from 'src/app/services/district/district.service';
+
 @Component({
   selector: 'app-district',
   templateUrl: './district.component.html',
   styleUrls: ['./district.component.css'],
 })
+@Injectable()
 export class DistrictComponent {
-  constructor(
-    @Inject(DISTRICT_SERVICE_TOKEN) private service: IDistrictService
-  ) {}
-
+  constructor(private service: DistrictService) {}
   districtTableData: TableModel<DistrictModel> = {
     hasHeader: true,
     hasPaging: true,
@@ -26,7 +22,7 @@ export class DistrictComponent {
   expandedRow = 0;
   ngOnInit() {
     this.service
-      .getAllDistrict()
+      .get()
       .subscribe((x: DistrictModel[]) => (this.districtTableData.items = x));
   }
   stageChangedHandler(stage: string, districtId: number) {

@@ -6,10 +6,8 @@ import { AppComponent } from './app.component';
 import { DistrictComponent } from './components/district/district.component';
 import { ApiHttpService } from './services/general/api-http.service';
 import { Constants } from './config/constant';
-import { ApiEndpointsService } from './services/general/api-endpoints.service';
 import { TableComponent } from './components/base/table/table.component';
 import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DISTRICT_SERVICE_TOKEN } from './services/district/IDistrictService';
 import { DistrictService } from './services/district/district.service';
 import { DistrictServiceMoq } from './services/district/district.service.mock';
 import { AddButtonComponent } from './components/base/add-button/add-button.component';
@@ -43,11 +41,9 @@ import { NavPillComponent } from './components/base/nav-pill/nav-pill.component'
     ReactiveFormsModule,
   ],
   providers: [
-    { provide: DISTRICT_SERVICE_TOKEN, useClass: DistrictServiceMoq },
-    ApiHttpService,
     Constants,
-    ApiEndpointsService,
     CommonService,
+    { provide: DistrictService, useClass: DistrictServiceMoq },
   ],
   bootstrap: [AppComponent],
 })

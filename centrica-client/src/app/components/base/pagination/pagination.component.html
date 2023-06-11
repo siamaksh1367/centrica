@@ -1,4 +1,5 @@
 <div class="d-flex align-items-center justify-content-center gap-3">
+  <span>Page</span>
   <nav aria-label="...">
     <ul class="pagination m-0">
       <li
@@ -20,6 +21,7 @@
       </li>
     </ul>
   </nav>
+  <span> Of {{ pageCount }} of Size</span>
   <app-select
     [options]="pagination"
     [initialItemIndex]="2"

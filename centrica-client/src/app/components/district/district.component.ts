@@ -22,9 +22,16 @@ export class DistrictComponent {
     hasAddNew: true,
     hasSorting: true,
   };
+  stage = '';
+  expandedRow = 0;
   ngOnInit() {
     this.service
       .getAllDistrict()
       .subscribe((x: DistrictModel[]) => (this.districtTableData.items = x));
+  }
+  stageChangedHandler(stage: string, districtId: number) {
+    console.log(stage);
+    this.stage = stage;
+    this.expandedRow = districtId;
   }
 }

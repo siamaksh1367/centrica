@@ -2,7 +2,7 @@
   <table class="table">
     <thead *ngIf="tableModel.hasHeader">
       <tr>
-        <th *ngFor="let header of _headers">
+        <th scope="col" *ngFor="let header of _headers">
           {{ header }}
           <app-sort-button
             *ngIf="tableModel.hasSorting"

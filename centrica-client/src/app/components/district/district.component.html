@@ -9,6 +9,17 @@
   <tr>
     <td>{{ district.id }}</td>
     <td>{{ district.name }}</td>
-    <td></td>
+    <td>
+      <app-nav-pill
+        [stages]="['sales', 'stores']"
+        [districtId]="district.id"
+        (stageChanged)="stageChangedHandler($event, district.id)"
+      ></app-nav-pill>
+    </td>
+  </tr>
+  <tr [ngSwitch]="stage" *ngIf="district.id === expandedRow">
+    <td colspan="4" *ngSwitchCase="'sales'">Sales</td>
+    <td colspan="4" *ngSwitchCase="'stores'">Stores</td>
+    <td *ngSwitchDefault></td>
   </tr>
 </ng-template>

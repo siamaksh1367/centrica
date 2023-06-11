@@ -21,6 +21,7 @@ import { PaginationComponent } from './components/base/pagination/pagination.com
 import { SelectComponent } from './components/base/select/select.component';
 import { FormsModule } from '@angular/forms';
 import { DistrictNewRowComponent } from './components/district-new-row/district-new-row.component';
+import { NavPillComponent } from './components/base/nav-pill/nav-pill.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DistrictNewRowComponent } from './components/district-new-row/district-
     PaginationComponent,
     SelectComponent,
     DistrictNewRowComponent,
+    NavPillComponent,
   ],
   imports: [
     BrowserModule,

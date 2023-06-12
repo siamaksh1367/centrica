@@ -3,8 +3,10 @@ using centrica.datamodels;
 using centrica.repository.Generic;
 using centrica.repository.Repositories.Interfaces;
 using centrica.services;
+using centrica.services.Behavior;
 using centrica.services.Commands;
 using centrica.services.Queries;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +17,7 @@ namespace centrica.serviceRegistration
         public static IServiceCollection RegisterServices(this IServiceCollection servic)
         {
             IMapper mapper = AutoMapperConfig.Initialize();
+
             return servic
                 .AddCors(options =>
             {
@@ -39,7 +42,10 @@ namespace centrica.serviceRegistration
                 .AddScoped<ISalePersonProductRepository, SalePersonProductRepository>()
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly))
                 .AddTransient<IRequestHandler<GetDistrictsQuery, IEnumerable<DistrictQuery>>, GetDistrictsQueryHandler>()
-                .AddTransient<IRequestHandler<AddDistrictCommand>, AddDistrictCommandHandler>();
+                .AddTransient<IRequestHandler<AddDistrictCommand>, AddDistrictCommandHandler>()
+                .AddValidatorsFromAssembly(typeof(ServiceRegistration).Assembly)
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+
         }
     }
 }

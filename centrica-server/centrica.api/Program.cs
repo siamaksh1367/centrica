@@ -1,5 +1,9 @@
+using AutoMapper;
+using centrica.api;
 using centrica.api.Migrations;
 using centrica.configurations;
+using centrica.services;
+using Serilog;
 using static centrica.serviceRegistration.ServiceRegistration;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +16,16 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .AddEnvironmentVariables()
     .Build();
+
+IMapper mapper = AutoMapperConfig.Initialize();
+builder.Host.UseSerilog((context, configuration) => configuration.MinimumLevel.Information().WriteTo.Console());
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices();
 builder.Services.AddScoped<Initializer, Initializer>();
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
 var app = builder.Build();
-
 using (var scope = app.Services.CreateScope())
 {
     var serv = scope.ServiceProvider.GetRequiredService<Initializer>();
@@ -31,7 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseSerilogRequestLogging();
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 app.UseCors("AllowOrigin");

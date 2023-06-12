@@ -164,6 +164,17 @@ ALTER TABLE [dbo].[Store] CHECK CONSTRAINT [FK_Store_District]
 
 INSERT INTO [dbo].[District] ([Name])VALUES('North Denmark')
 INSERT INTO [dbo].[District] ([Name])VALUES('Southern Denmark')
+INSERT INTO [dbo].[Store] ([Name], [DistrictId])VALUES('Store A',1)
+INSERT INTO [dbo].[Store] ([Name],[DistrictId])VALUES('Store B',2)
+INSERT INTO [dbo].[SalePerson] ([Name])VALUES('Sale Person 1')
+INSERT INTO [dbo].[SalePerson] ([Name])VALUES('Sale Person 2')
+INSERT INTO [dbo].[SalePerson] ([Name])VALUES('Sale Person 3')
+INSERT INTO [dbo].[SalePerson] ([Name])VALUES('Sale Person 4')
+INSERT INTO [dbo].[DistrictSalePerson] ([SalePersonId] ,[DistrictId],[IsPrimary])VALUES(1,1,1)
+INSERT INTO [dbo].[DistrictSalePerson] ([SalePersonId] ,[DistrictId],[IsPrimary])VALUES(2,1,0)
+INSERT INTO [dbo].[DistrictSalePerson] ([SalePersonId] ,[DistrictId],[IsPrimary])VALUES(3,2,1)
+INSERT INTO [dbo].[DistrictSalePerson] ([SalePersonId] ,[DistrictId],[IsPrimary])VALUES(4,2,0)
+ 
 
 USE [master]
 

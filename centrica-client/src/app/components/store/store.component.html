@@ -1,1 +1,27 @@
-<p>store works!</p>
+<app-table
+  [tableModel]="districtTableData"
+  [rowTemplate]="districtRow"
+  [collapseId]="'districtAddRow'"
+>
+  <app-district-new-row
+    (newItemAdded)="newItemAddedHandler($event)"
+  ></app-district-new-row>
+</app-table>
+<ng-template #districtRow let-district>
+  <tr>
+    <td>{{ district.id }}</td>
+    <td>{{ district.name }}</td>
+    <td>
+      <app-nav-pill
+        [stages]="['sales', 'stores']"
+        [districtId]="district.id"
+        (stageChanged)="stageChangedHandler($event, district.id)"
+      ></app-nav-pill>
+    </td>
+  </tr>
+  <tr [ngSwitch]="stage" *ngIf="district.id === expandedRow">
+    <td colspan="4" *ngSwitchCase="'sales'">Sales</td>
+    <td colspan="4" *ngSwitchCase="'stores'">Stores</td>
+    <ng-container *ngSwitchDefault></ng-container>
+  </tr>
+</ng-template>

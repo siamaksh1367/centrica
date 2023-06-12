@@ -1,1 +1,16 @@
-<p>sale-person works!</p>
+<app-table
+  [tableModel]="salePersonTableData"
+  [rowTemplate]="salePersonRow"
+  [collapseId]="'districtAddRow'"
+>
+  <app-sale-person-new-row
+    (newItemAdded)="newItemAddedHandler($event)"
+  ></app-sale-person-new-row>
+</app-table>
+<ng-template #salePersonRow let-salePerson>
+  <tr>
+    <td>{{ salePerson.id }}</td>
+    <td>{{ salePerson.name }}</td>
+    <td>{{ salePerson.isPrimary }}</td>
+  </tr>
+</ng-template>

@@ -9,6 +9,8 @@ using centrica.services.Queries;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace centrica.serviceRegistration
 {
@@ -20,14 +22,14 @@ namespace centrica.serviceRegistration
 
             return servic
                 .AddCors(options =>
-            {
-                options.AddPolicy("AllowOrigin", builder =>
                 {
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
-                });
-            })
+                    options.AddPolicy("AllowOrigin", builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+                })
                 .AddAutoMapper(typeof(centrica.services.AutoMapperConfig))
                 .AddSingleton(mapper)
                 .AddSingleton<DapperContext>()
@@ -44,7 +46,12 @@ namespace centrica.serviceRegistration
                 .AddTransient<IRequestHandler<GetDistrictsQuery, IEnumerable<DistrictQuery>>, GetDistrictsQueryHandler>()
                 .AddTransient<IRequestHandler<AddDistrictCommand>, AddDistrictCommandHandler>()
                 .AddValidatorsFromAssembly(typeof(ServiceRegistration).Assembly)
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>))
+                .AddLogging(builder =>
+                {
+                    builder.ClearProviders();
+                    builder.AddSerilog();
+                }); ;
 
         }
     }

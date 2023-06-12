@@ -1,26 +1,26 @@
 version: "3"
 services:
-  angular-app:
-    build:
-      context: ./../centrica-client
-      dockerfile: Dockerfile
-    ports:
-      - 4200:80
-    depends_on:
-      - dotnet-app
+  #angular-app:
+  #  build:
+  #    context: ./../centrica-client
+  #    dockerfile: Dockerfile
+  #  ports:
+  #    - 4200:80
+  #  depends_on:
+  #    - dotnet-app
 
-  dotnet-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=sql-server;Database=Centrica;User Id=sa;Password=P@ssw0rd;
-      - ConnectionStrings__Master=Server=sql-server;Database=master;User Id=sa;Password=P@ssw0rd;
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - 8080:80
-    depends_on:
-      - sql-server
+  #dotnet-app:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile
+  #  environment:
+  #    - ConnectionStrings__DefaultConnection=Server=sql-server;Database=Centrica;User Id=sa;Password=P@ssw0rd;
+  #    - ConnectionStrings__Master=Server=sql-server;Database=master;User Id=sa;Password=P@ssw0rd;
+  #    - ASPNETCORE_ENVIRONMENT=Development
+  #  ports:
+  #    - 8080:80
+  #  depends_on:
+  #    - sql-server
 
   sql-server:
     container_name: sqlserver

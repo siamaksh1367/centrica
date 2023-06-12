@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center justify-content-center">
-  <form (ngSubmit)="onSubmit()" class="form-horizontal">
+  <form class="form-horizontal">
     <div class="form-group row">
       <label for="districtName" class="col-sm-4 col-form-label"
         >District Name</label
@@ -19,7 +19,12 @@
         </div>
       </div>
       <div class="col-sm-1">
-        <button type="submit" class="btn btn-success" [disabled]="!name">
+        <button
+          type="submit"
+          (click)="onSubmit()"
+          class="btn btn-success"
+          [disabled]="!name"
+        >
           Add
         </button>
       </div>

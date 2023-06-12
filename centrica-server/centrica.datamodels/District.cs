@@ -3,12 +3,18 @@
 namespace centrica.datamodels
 {
     [Table("District")]
-    public class District
+    public class DistrictCommand
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<SalePerson> SalePeople { get; set; }
-        public ICollection<Store> Stores { get; set; }
+    }
+    [Table("District")]
+    public class DistrictQuery
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<SalePersonQuery> SalePeople { get; set; } = new List<SalePersonQuery>();
+        public ICollection<StoreQuery> Stores = new List<StoreQuery>();
     }
 
 }

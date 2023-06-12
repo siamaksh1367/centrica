@@ -1,11 +1,11 @@
 ﻿namespace centrica.repository.Generic
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<TCommand, SQuery> where TCommand : class where SQuery : class
     {
-        Task<int> AddAsync(T entity);
-        Task<bool> DeleteAsync(T entity);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
-        Task<bool> UpdateAsync(T entity);
+        Task<int> AddAsync(TCommand entity);
+        Task<bool> DeleteAsync(SQuery entity);
+        Task<IEnumerable<SQuery>> GetAllAsync();
+        Task<TCommand> GetByIdAsync(int id);
+        Task<bool> UpdateAsync(TCommand entity);
     }
 }

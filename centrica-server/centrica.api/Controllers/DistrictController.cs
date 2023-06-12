@@ -1,11 +1,13 @@
 ﻿using centrica.datamodels;
+using centrica.services.Commands;
 using centrica.services.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace webapi.Controllers
+namespace centrica.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,15 +21,25 @@ namespace webapi.Controllers
         }
         // GET: api/<DistrictController>
         [HttpGet]
-        public async Task<IEnumerable<District>> Get()
+        public async Task<IEnumerable<DistrictQuery>> Get()
         {
             return await _mediator.Send(new GetDistrictsQuery());
         }
 
+        // GET api/<DistrictController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
         // POST api/<DistrictController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async void Post([FromBody] string value)
         {
+            var json = JsonConvert.DeserializeObject(value);
+            var district = JsonConvert.DeserializeObject<AddDistrictCommand>(json.ToString());
+            await _mediator.Send(district);
         }
 
         // PUT api/<DistrictController>/5

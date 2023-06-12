@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { ChangeDetectorRef, Component, Injectable } from '@angular/core';
 import { DistrictModel } from 'src/app/models/DistrictModel';
 import { TableModel } from 'src/app/models/base/TableModel';
 import { DistrictService } from 'src/app/services/district/district.service';
@@ -12,40 +12,34 @@ import { ToastrService } from 'ngx-toastr';
 export class DistrictComponent {
   constructor(
     private service: DistrictService,
-    private toastr: ToastrService
-  ) {}
-  districtTableData: TableModel<DistrictModel> = {
-    hasHeader: true,
-    hasPaging: true,
-    items: [],
-    hasAddNew: true,
-    hasSorting: true,
-  };
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.districtTableData = {
+      hasHeader: true,
+      hasPaging: true,
+      items: [],
+      headers: ['id', 'name'],
+      hasAddNew: true,
+      hasSorting: true,
+    };
+  }
+  districtTableData: TableModel<DistrictModel>;
   stage = '';
   expandedRow = 0;
-  _render: boolean = true;
-  ngOnInit() {
-    this.service
-      .get()
-      .subscribe((x: DistrictModel[]) => (this.districtTableData.items = x));
+
+  async ngOnInit() {
+    this.districtTableData.items = await this.service.get();
   }
 
-  newItemAddedHandler(name: string) {
+  async newItemAddedHandler(name: string) {
     let districtModel: DistrictModel = {
       name: name,
     };
-    this.service.post(districtModel).subscribe(
-      (x) => {
-        this.toastr.success('Success message', 'Success');
-        this.districtTableData = { ...this.districtTableData };
-      },
-      (x) => {
-        this.toastr.error('Failed message', 'Failed');
-      },
-      () => {
-        console.log('Complete');
-      }
-    );
+    await this.service.post(districtModel);
+    this.toastr.success('district Added', 'Done');
+    this.cdr.detectChanges();
+    this.districtTableData.items = await this.service.get();
   }
   stageChangedHandler(stage: string, districtId: number) {
     console.log(stage);

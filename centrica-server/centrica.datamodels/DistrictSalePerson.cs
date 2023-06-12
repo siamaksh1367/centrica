@@ -3,11 +3,18 @@
 namespace centrica.datamodels
 {
     [Table("DistrictSalePerson")]
-    public class DistrictSalePerson
+    public class DistrictSalePersonQuery
     {
         public int Id { get; set; }
-        public SalePerson SalePerson { get; set; }
-        public District District { get; set; }
+        public SalePersonQuery SalePerson { get; set; }
+        public DistrictCommand District { get; set; }
+        public int SalePersonId { get; set; }
+        public int DistrictId { get; set; }
+        public bool IsPrimary { get; set; }
+    }
+    public class DistrictSalePersonCommand
+    {
+        public int Id { get; set; }
         public int SalePersonId { get; set; }
         public int DistrictId { get; set; }
         public bool IsPrimary { get; set; }

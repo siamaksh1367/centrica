@@ -4,4 +4,5 @@ export interface TableModel<T> {
   hasSorting: boolean;
   hasAddNew: boolean;
   items: T[];
+  headers: string[];
 }

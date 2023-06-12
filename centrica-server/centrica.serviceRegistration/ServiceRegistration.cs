@@ -1,6 +1,9 @@
-﻿using centrica.datamodels;
+﻿using AutoMapper;
+using centrica.datamodels;
 using centrica.repository.Generic;
 using centrica.repository.Repositories.Interfaces;
+using centrica.services;
+using centrica.services.Commands;
 using centrica.services.Queries;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +14,9 @@ namespace centrica.serviceRegistration
     {
         public static IServiceCollection RegisterServices(this IServiceCollection servic)
         {
-            return servic.AddCors(options =>
+            IMapper mapper = AutoMapperConfig.Initialize();
+            return servic
+                .AddCors(options =>
             {
                 options.AddPolicy("AllowOrigin", builder =>
                 {
@@ -20,17 +25,21 @@ namespace centrica.serviceRegistration
                            .AllowAnyHeader();
                 });
             })
+                .AddAutoMapper(typeof(centrica.services.AutoMapperConfig))
+                .AddSingleton(mapper)
+                .AddSingleton<DapperContext>()
                 .AddTransient<IUnitOfWork, UnitOfWork>()
-                .AddTransient<IDistrictRepository, DistrictRepository>()
-                .AddTransient<IDistrictSalePersonRepository, DistrictSalePersonRepository>()
-                .AddTransient<IProductRepository, ProductRepository>()
-                .AddTransient<ISalePersonRepository, SalePersonRepository>()
-                .AddTransient<IStoreRepository, StoreRepository>()
-                .AddTransient<IProductStoreSellRepository, ProductStoreSellRepository>()
-                .AddTransient<ITransitionPeriodRepository, TransitionPeriodRepository>()
-                .AddTransient<ISalePersonProductRepository, SalePersonProductRepository>()
+                .AddScoped<IDistrictRepository, DistrictRepository>()
+                .AddScoped<IDistrictSalePersonRepository, DistrictSalePersonRepository>()
+                .AddScoped<IProductRepository, ProductRepository>()
+                .AddScoped<ISalePersonRepository, SalePersonRepository>()
+                .AddScoped<IStoreRepository, StoreRepository>()
+                .AddScoped<IProductStoreSellRepository, ProductStoreSellRepository>()
+                .AddScoped<ITransitionPeriodRepository, TransitionPeriodRepository>()
+                .AddScoped<ISalePersonProductRepository, SalePersonProductRepository>()
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly))
-                .AddTransient<IRequestHandler<GetDistrictsQuery, IEnumerable<District>>, GetDistrictsQueryHandler>();
+                .AddTransient<IRequestHandler<GetDistrictsQuery, IEnumerable<DistrictQuery>>, GetDistrictsQueryHandler>()
+                .AddTransient<IRequestHandler<AddDistrictCommand>, AddDistrictCommandHandler>();
         }
     }
 }

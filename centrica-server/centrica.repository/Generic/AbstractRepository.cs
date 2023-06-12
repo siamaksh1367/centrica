@@ -1,56 +1,59 @@
-﻿using centrica.configurations;
-using Dapper.Contrib.Extensions;
-using Microsoft.Extensions.Options;
-using System.Data.SqlClient;
+﻿using Dapper.Contrib.Extensions;
 
 namespace centrica.repository.Generic
 {
-    public class AbstractRepository<T> : IGenericRepository<T> where T : class
+    public class AbstractRepository<TCommand, SQuery> : IGenericRepository<TCommand, SQuery> where TCommand : class where SQuery : class
     {
-        private readonly ConnectionStrings _config;
-
-        public AbstractRepository(IOptions<ConnectionStrings> config)
+        protected readonly DapperContext _context;
+        public AbstractRepository(DapperContext context)
         {
-            _config = config.Value;
+            _context = context;
         }
-        public async Task<int> AddAsync(T entity)
+
+        public async Task<int> AddAsync(TCommand entity)
         {
-            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
+            using (var connection = _context.CreateConnection())
             {
                 return await connection.InsertAsync(entity);
             }
         }
 
-        public async Task<bool> DeleteAsync(T entity)
+        public async Task<bool> DeleteAsync(SQuery entity)
         {
-            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
+            using (var connection = _context.CreateConnection())
             {
                 return await connection.DeleteAsync(entity);
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+
+        public async Task<IEnumerable<SQuery>> GetAllAsync()
         {
-            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
+            using (var connection = _context.CreateConnection())
             {
-                return await connection.GetAllAsync<T>();
+                return await connection.GetAllAsync<SQuery>();
             }
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<SQuery> GetByIdAsync(int id)
         {
-            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
+            using (var connection = _context.CreateConnection())
             {
-                return await connection.GetAsync<T>(id);
+                return await connection.GetAsync<SQuery>(id);
             }
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public async Task<bool> UpdateAsync(TCommand entity)
         {
-            using (SqlConnection connection = new SqlConnection(_config.DefaultConnection))
+            using (var connection = _context.CreateConnection())
             {
                 return await connection.UpdateAsync(entity);
             }
+        }
+
+        Task<TCommand> IGenericRepository<TCommand, SQuery>.GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

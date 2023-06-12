@@ -4,7 +4,7 @@ using MediatR;
 
 namespace centrica.services.Commands
 {
-    public record AddSalePersonCommand(SalePerson SalePerson) : IRequest;
+    public record AddSalePersonCommand(SalePersonCommand SalePerson) : IRequest;
 
     public class AddSalePersonHandler : IRequestHandler<AddSalePersonCommand>
     {

@@ -4,9 +4,9 @@ using MediatR;
 
 namespace centrica.services.Queries
 {
-    public record GetDistrictsQuery : IRequest<IEnumerable<District>>;
+    public record GetDistrictsQuery : IRequest<IEnumerable<DistrictQuery>>;
 
-    public class GetDistrictsQueryHandler : IRequestHandler<GetDistrictsQuery, IEnumerable<District>>
+    public class GetDistrictsQueryHandler : IRequestHandler<GetDistrictsQuery, IEnumerable<DistrictQuery>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -14,7 +14,7 @@ namespace centrica.services.Queries
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<District>> Handle(GetDistrictsQuery request, CancellationToken cancellationToken) =>
+        public async Task<IEnumerable<DistrictQuery>> Handle(GetDistrictsQuery request, CancellationToken cancellationToken) =>
             await _unitOfWork.DistrictRepository.GetAllAsync();
     }
 }

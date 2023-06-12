@@ -1,14 +1,12 @@
-﻿using centrica.configurations;
-using centrica.datamodels;
+﻿using centrica.datamodels;
 using centrica.repository.Generic;
-using Microsoft.Extensions.Options;
 
 namespace centrica.repository.Repositories.Interfaces
 {
-    public interface ITransitionPeriodRepository : IGenericRepository<TransitionPeriod> { }
-    public class TransitionPeriodRepository : AbstractRepository<TransitionPeriod>, ITransitionPeriodRepository
+    public interface ITransitionPeriodRepository : IGenericRepository<TransitionPeriod, TransitionPeriod> { }
+    public class TransitionPeriodRepository : AbstractRepository<TransitionPeriod, TransitionPeriod>, ITransitionPeriodRepository
     {
-        public TransitionPeriodRepository(IOptions<ConnectionStrings> config) : base(config)
+        public TransitionPeriodRepository(DapperContext context) : base(context)
         {
         }
     }

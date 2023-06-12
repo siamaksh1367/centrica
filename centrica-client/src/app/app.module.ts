@@ -48,11 +48,7 @@ import { SalePersonNewRowComponent } from './components/base/sale-person-new-row
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),
   ],
-  providers: [
-    Constants,
-    CommonService,
-    { provide: DistrictService, useClass: DistrictServiceMoq },
-  ],
+  providers: [Constants, CommonService, DistrictService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

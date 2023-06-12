@@ -1,14 +1,12 @@
-﻿using centrica.configurations;
-using centrica.datamodels;
+﻿using centrica.datamodels;
 using centrica.repository.Generic;
-using Microsoft.Extensions.Options;
 
 namespace centrica.repository.Repositories.Interfaces
 {
-    public interface ISalePersonProductRepository : IGenericRepository<SalePersonProduct> { }
-    public class SalePersonProductRepository : AbstractRepository<SalePersonProduct>, ISalePersonProductRepository
+    public interface ISalePersonProductRepository : IGenericRepository<SalePersonProductCommand, SalePersonProductQuery> { }
+    public class SalePersonProductRepository : AbstractRepository<SalePersonProductCommand, SalePersonProductQuery>, ISalePersonProductRepository
     {
-        public SalePersonProductRepository(IOptions<ConnectionStrings> config) : base(config)
+        public SalePersonProductRepository(DapperContext context) : base(context)
         {
         }
     }

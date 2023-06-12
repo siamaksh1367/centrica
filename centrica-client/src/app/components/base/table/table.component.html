@@ -3,7 +3,7 @@
   <table class="table">
     <thead *ngIf="tableModel.hasHeader">
       <tr>
-        <th scope="col" *ngFor="let header of _headers">
+        <th scope="col" *ngFor="let header of tableModel.headers">
           {{ header }}
           <app-sort-button
             *ngIf="tableModel.hasSorting"
@@ -38,7 +38,7 @@
   </table>
   <app-pagination
     *ngIf="tableModel.hasPaging"
-    [pageCount]="_pageCount"
+    [pageCount]="pagingConfigure(tableModel.items)"
     [selectedPageNumber]="_selectedPageNumber"
     (pageSizeChanged)="pageSizeChangedHandler($event)"
     (pageNumberChanged)="pageNumberChangedHandler($event)"

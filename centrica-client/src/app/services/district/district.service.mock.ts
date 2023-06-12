@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, firstValueFrom, lastValueFrom, of } from 'rxjs';
 import { DistrictModel } from 'src/app/models/DistrictModel';
 import { ApiHttpService } from '../general/api-http.service';
 
@@ -35,14 +35,20 @@ export class DistrictServiceMoq extends ApiHttpService<DistrictModel> {
     // { id: 17, name: 'District 17' },
     // { id: 18, name: 'District 18' },
   ];
-  public override get(): Observable<DistrictModel[]> {
-    return of(this.districts);
-  }
 
-  public override post(data: DistrictModel): Observable<DistrictModel> {
-    console.log(this.districts);
+  public override async get(): Promise<DistrictModel[]> {
+    return new Promise((resolve, reject) => {
+      resolve(this.districts); // or reject(error) for rejecting the Promise
+    });
+  }
+  public override async post(data: DistrictModel): Promise<DistrictModel> {
     data.id = this.districts.length + 1;
-    this.districts.push({ id: this.districts.length + 1, name: data.name });
-    return of(data);
+    this.districts.push({
+      id: this.districts.length + 1,
+      name: data.name,
+    });
+    return new Promise((resolve, reject) => {
+      resolve(data);
+    });
   }
 }

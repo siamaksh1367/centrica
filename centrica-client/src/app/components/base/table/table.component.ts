@@ -18,16 +18,17 @@ export class TableComponent<T extends object> {
   readonly _sortOrderNone: SortOrders = SortOrders.None;
   _pageSize: number = 5;
   _selectedPageNumber: number = 1;
-  _pageCount: number = 1;
 
   constructor(private common: CommonService) {}
   ngOnInit() {
-    this.getHeaders();
-    this.pagingConfigure();
+    if (this.tableModel.items.length != 0) {
+      this.pagingConfigure(this.tableModel.items);
+    }
   }
   ngOnChanges() {
-    this.getHeaders();
-    this.pagingConfigure();
+    if (this.tableModel.items.length != 0) {
+      this.pagingConfigure(this.tableModel.items);
+    }
   }
 
   sortClickHandler(sortOrder: SortOrders, header: string) {
@@ -49,7 +50,6 @@ export class TableComponent<T extends object> {
 
   private updatePaging(pageSize: number) {
     this._pageSize = pageSize;
-    this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
   }
   private sortShownItems(sortOrder: SortOrders, header: string) {
     this._sortOrder = sortOrder;
@@ -63,13 +63,7 @@ export class TableComponent<T extends object> {
     }
   }
 
-  private pagingConfigure() {
-    this._pageCount = Math.ceil(this.tableModel.items.length / this._pageSize);
-  }
-
-  private getHeaders() {
-    if (this.tableModel.items) {
-      this._headers = Object.keys(this.tableModel?.items[0]);
-    }
+  public pagingConfigure(array: T[]) {
+    return Math.ceil(array.length / this._pageSize);
   }
 }

@@ -1,8 +1,10 @@
 // Angular Modules
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Constants } from 'src/app/config/constant';
+import { Observable, firstValueFrom, lastValueFrom } from 'rxjs';
 import * as qs from 'qs';
+import { DistrictModel } from 'src/app/models/DistrictModel';
 
 export class ApiHttpService<T> {
   private _url: string = '';
@@ -13,22 +15,39 @@ export class ApiHttpService<T> {
   ) {
     this._url = this.constant.API_ENDPOINT + this._resourceName;
   }
-  public get() {
-    return this.http.get<T[]>(this._url);
+  public async get() {
+    let result = this.http.get<T[]>(this._url);
+    return await lastValueFrom(result);
   }
-  public post(data: T) {
-    return this.http.post<T>(this._url, data);
+  public async post(data: T) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: 'my-auth-token',
+        Accept: '*/*',
+      }),
+    };
+    let json = JSON.stringify(data);
+    let result = this.http.post<T>(
+      this._url,
+      JSON.stringify(JSON.stringify(json)),
+      options
+    );
+    return await lastValueFrom(result);
   }
-  public put(data: T) {
-    return this.http.put<T>(this._url, data);
+  public async put(data: T) {
+    let result = this.http.put<T>(this._url, data);
+    return await lastValueFrom(result);
   }
-  public delete() {
-    return this.http.delete(this._url);
+  public async delete() {
+    let result = this.http.delete(this._url);
+    return await lastValueFrom(result);
   }
-  public getWithQueryString(params: any) {
+  public async getWithQueryString(params: any) {
     const queryString = qs.stringify(params);
     const urlWithQueryString = `${this._resourceName}?${queryString}`;
-    return this.http.get<T[]>(urlWithQueryString);
+    let result = this.http.get<T[]>(urlWithQueryString);
+    return await lastValueFrom(result);
   }
 }
 // import { BadInput } from './../common/bad-input';

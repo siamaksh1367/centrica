@@ -1,14 +1,12 @@
-﻿using centrica.configurations;
-using centrica.datamodels;
+﻿using centrica.datamodels;
 using centrica.repository.Generic;
-using Microsoft.Extensions.Options;
 
 namespace centrica.repository.Repositories.Interfaces
 {
-    public interface IDistrictRepository : IGenericRepository<District> { }
-    public class DistrictRepository : AbstractRepository<District>, IDistrictRepository
+    public interface IDistrictRepository : IGenericRepository<DistrictCommand, DistrictQuery> { }
+    public class DistrictRepository : AbstractRepository<DistrictCommand, DistrictQuery>, IDistrictRepository
     {
-        public DistrictRepository(IOptions<ConnectionStrings> config) : base(config)
+        public DistrictRepository(DapperContext context) : base(context)
         {
         }
     }

@@ -11,6 +11,7 @@ namespace centrica.datamodels
         public ICollection<StoreQuery> Stores { get; set; }
     }
 
+    [Table("SalePerson")]
     public class SalePersonCommand
     {
         public int Id { get; set; }

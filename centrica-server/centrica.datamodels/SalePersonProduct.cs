@@ -12,6 +12,7 @@ namespace centrica.datamodels
         public int ProductId { get; set; }
         public float Available { get; set; }
     }
+    [Table("SalePersonProduct")]
     public class SalePersonProductCommand
     {
         public int Id { get; set; }

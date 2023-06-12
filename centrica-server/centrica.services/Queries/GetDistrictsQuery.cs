@@ -17,4 +17,6 @@ namespace centrica.services.Queries
         public async Task<IEnumerable<DistrictQuery>> Handle(GetDistrictsQuery request, CancellationToken cancellationToken) =>
             await _unitOfWork.DistrictRepository.GetAllAsync();
     }
+
+
 }

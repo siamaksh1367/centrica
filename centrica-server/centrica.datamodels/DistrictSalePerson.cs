@@ -12,6 +12,7 @@ namespace centrica.datamodels
         public int DistrictId { get; set; }
         public bool IsPrimary { get; set; }
     }
+    [Table("DistrictSalePerson")]
     public class DistrictSalePersonCommand
     {
         public int Id { get; set; }

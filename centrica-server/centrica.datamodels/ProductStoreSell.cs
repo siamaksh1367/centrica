@@ -14,6 +14,7 @@ namespace centrica.datamodels
         public float Quantity { get; set; }
     }
 
+    [Table("ProductStoreSell")]
     public class ProductStoreSellCommand
     {
         public int Id { get; set; }

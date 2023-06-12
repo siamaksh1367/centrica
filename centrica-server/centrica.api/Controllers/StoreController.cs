@@ -11,28 +11,28 @@ namespace centrica.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DistrictController : ControllerBase
+    public class StoreController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public DistrictController(IMediator mediator)
+        public StoreController(IMediator mediator)
         {
             _mediator = mediator;
         }
-        // GET: api/<DistrictController>
-        [HttpGet]
-        public async Task<IEnumerable<DistrictQuery>> Get()
+        // GET: api/<StoreController>
+        [Route("stores/district/{districtId}")]
+        public async Task<IEnumerable<StoreQuery>> GetStoresByDistrictId(int districtId)
         {
-            return await _mediator.Send(new GetDistrictsQuery());
+            return await _mediator.Send(new GetStoreByDistricIdQuery(districtId));
         }
 
-        // POST api/<DistrictController>
+        // POST api/<StoreController>
         [HttpPost]
-        public async void Post([FromBody] string value)
+        public async Task Post([FromBody] string value)
         {
             var json = JsonConvert.DeserializeObject(value);
-            var district = JsonConvert.DeserializeObject<AddDistrictCommand>(json.ToString());
-            await _mediator.Send(district);
+            var store = JsonConvert.DeserializeObject<AddStoreCommand>(json.ToString());
+            await _mediator.Send(store);
         }
     }
 }

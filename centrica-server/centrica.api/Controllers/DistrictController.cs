@@ -28,7 +28,7 @@ namespace centrica.api.Controllers
 
         // POST api/<DistrictController>
         [HttpPost]
-        public async void Post([FromBody] string value)
+        public async Task Post([FromBody] string value)
         {
             var json = JsonConvert.DeserializeObject(value);
             var district = JsonConvert.DeserializeObject<AddDistrictCommand>(json.ToString());

@@ -1,11 +1,11 @@
 <app-table
   [tableModel]="salePersonTableData"
   [rowTemplate]="salePersonRow"
-  [collapseId]="'districtAddRow'"
+  [collapseId]="'salePersonAddRow'"
 >
-  <app-sale-person-new-row
+  <!-- <app-sale-person-new-row
     (newItemAdded)="newItemAddedHandler($event)"
-  ></app-sale-person-new-row>
+  ></app-sale-person-new-row> -->
 </app-table>
 <ng-template #salePersonRow let-salePerson>
   <tr>

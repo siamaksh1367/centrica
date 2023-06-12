@@ -14,6 +14,6 @@ namespace centrica.services.Queries
             _unitOfWork = unitOfWork;
         }
         public async Task<IEnumerable<SalePersonQuery>> Handle(GetSalePersonByDistirctIdQuery request, CancellationToken cancellationToken) =>
-            await _unitOfWork.SalePersonRepository.GetAllAsync();
+            await _unitOfWork.DistrictSalePersonRepository.GetSalePersonWithDistrictId(request.districtId);
     }
 }

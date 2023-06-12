@@ -25,6 +25,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices();
 builder.Services.AddScoped<Initializer, Initializer>();
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
@@ -39,9 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseSerilogRequestLogging();
-app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
-app.MapControllers();
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 app.UseCors("AllowOrigin");
-
+app.MapControllers();
 app.Run();

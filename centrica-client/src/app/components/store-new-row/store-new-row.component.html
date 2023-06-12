@@ -1,0 +1,33 @@
+<div class="d-flex align-items-center justify-content-center">
+  <form class="form-horizontal">
+    <div class="form-group row">
+      <label for="districtName" class="col-sm-4 col-form-label"
+        >Store Name</label
+      >
+      <div class="col-sm-7">
+        <input
+          type="text"
+          class="form-control"
+          id="districtName"
+          placeholder="Enter name"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+        <div *ngIf="!name" class="text-danger">
+          Please enter a value for name.
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <button
+          type="submit"
+          (click)="onSubmit()"
+          class="btn btn-success"
+          [disabled]="!name"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

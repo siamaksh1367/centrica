@@ -44,14 +44,20 @@ namespace centrica.serviceRegistration
                 .AddScoped<ISalePersonProductRepository, SalePersonProductRepository>()
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly))
                 .AddTransient<IRequestHandler<GetDistrictsQuery, IEnumerable<DistrictQuery>>, GetDistrictsQueryHandler>()
+                .AddTransient<IRequestHandler<GetStoreByDistricIdQuery, IEnumerable<StoreQuery>>, GetStoreByDistricIdQueryHandler>()
+                .AddTransient<IRequestHandler<GetSalePersonByDistirctIdQuery, IEnumerable<SalePersonQuery>>, GetSalePersonByDistirctIdQueryHandler>()
                 .AddTransient<IRequestHandler<AddDistrictCommand>, AddDistrictCommandHandler>()
+                .AddTransient<IRequestHandler<AddStoreCommand>, AddStoreCommandHandler>()
+                .AddTransient<IRequestHandler<AddSalePersonCommand>, AddSalePersonCommandHandler>()
                 .AddValidatorsFromAssembly(typeof(ServiceRegistration).Assembly)
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>))
                 .AddLogging(builder =>
                 {
                     builder.ClearProviders();
                     builder.AddSerilog();
-                }); ;
+                });
+
+
 
         }
     }

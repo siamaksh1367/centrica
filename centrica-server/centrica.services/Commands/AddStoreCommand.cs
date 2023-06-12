@@ -5,7 +5,7 @@ using MediatR;
 
 namespace centrica.services.Commands
 {
-    public record AddStoreCommand(string name) : IRequest;
+    public record AddStoreCommand(string name, int districtId) : IRequest;
     public class AddStoreCommandHandler : IRequestHandler<AddStoreCommand>
     {
         private readonly IUnitOfWork _unitOfWork;

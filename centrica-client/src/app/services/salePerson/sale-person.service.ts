@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Constants } from 'src/app/config/constant';
 import { Injectable } from '@angular/core';
-import { ApiHttpService } from './general/api-http.service';
-import { SalePersonModel } from '../models/SalePersonModel';
+import { SalePersonModel } from 'src/app/models/SalePersonModel';
+import { ApiHttpService } from '../general/api-http.service';
 
 @Injectable({
   providedIn: 'root',

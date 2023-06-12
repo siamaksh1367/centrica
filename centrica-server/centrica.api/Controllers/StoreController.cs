@@ -20,7 +20,8 @@ namespace centrica.api.Controllers
             _mediator = mediator;
         }
         // GET: api/<StoreController>
-        [Route("stores/district/{districtId}")]
+        [HttpGet]
+        [Route("district/{districtId}")]
         public async Task<IEnumerable<StoreQuery>> GetStoresByDistrictId(int districtId)
         {
             return await _mediator.Send(new GetStoreByDistricIdQuery(districtId));

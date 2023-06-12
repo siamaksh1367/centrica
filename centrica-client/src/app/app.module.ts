@@ -21,6 +21,9 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { SalePersonComponent } from './components/sale-person/sale-person.component';
 import { StoreComponent } from './components/store/store.component';
 import { SalePersonNewRowComponent } from './components/base/sale-person-new-row/sale-person-new-row.component';
+import { StoreNewRowComponent } from './components/store-new-row/store-new-row.component';
+import { StoreService } from './services/store/store.service';
+import { SalePersonService } from './services/salePerson/sale-person.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { SalePersonNewRowComponent } from './components/base/sale-person-new-row
     SalePersonComponent,
     StoreComponent,
     SalePersonNewRowComponent,
+    StoreNewRowComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,13 @@ import { SalePersonNewRowComponent } from './components/base/sale-person-new-row
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),
   ],
-  providers: [Constants, CommonService, DistrictService],
+  providers: [
+    Constants,
+    CommonService,
+    DistrictService,
+    StoreService,
+    SalePersonService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

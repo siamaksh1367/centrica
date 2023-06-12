@@ -21,7 +21,9 @@
   </tr>
   <tr [ngSwitch]="stage" *ngIf="district.id === expandedRow">
     <td colspan="4" *ngSwitchCase="'sales'">Sales</td>
-    <td colspan="4" *ngSwitchCase="'stores'">Stores</td>
+    <td colspan="4" *ngSwitchCase="'stores'">
+      <app-store [districtId]="district.id"></app-store>
+    </td>
     <ng-container *ngSwitchDefault></ng-container>
   </tr>
 </ng-template>

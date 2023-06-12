@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { SalePersonModel } from 'src/app/models/SalePersonModel';
 import { TableModel } from 'src/app/models/base/TableModel';
-import { SalePersonService } from 'src/app/services/sale-person.service';
+import { SalePersonService } from 'src/app/services/salePerson/sale-person.service';
 
 @Component({
   selector: 'app-sale-person',

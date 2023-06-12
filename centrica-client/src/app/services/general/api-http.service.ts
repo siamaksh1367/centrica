@@ -49,6 +49,10 @@ export class ApiHttpService<T> {
     let result = this.http.get<T[]>(urlWithQueryString);
     return await lastValueFrom(result);
   }
+  public async getUrl(urlAppendix: string) {
+    let result = this.http.get<T[]>(this._url + urlAppendix);
+    return await lastValueFrom(result);
+  }
 }
 // import { BadInput } from './../common/bad-input';
 // import { NotFoundError } from './../common/not-found-error';

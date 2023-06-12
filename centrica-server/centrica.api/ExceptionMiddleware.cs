@@ -1,33 +1,46 @@
-﻿using System.Net;
+﻿using FluentValidation;
+using System.Net;
 using System.Text.Json;
 
 namespace centrica.api
 {
-    public class ExceptionMiddleware
+    public class GlobalExceptionHandlingMiddleware : IMiddleware
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+
+        private readonly ILogger<GlobalExceptionHandlingMiddleware> _logger;
+        public GlobalExceptionHandlingMiddleware(ILogger<GlobalExceptionHandlingMiddleware> logger)
         {
             _logger = logger;
-            _next = next;
         }
-        public async Task InvokeAsync(HttpContext httpContext)
+
+
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
-                await _next(httpContext);
+                await next(context);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                await HandleExceptionAsync(context, ex, HttpStatusCode.BadRequest);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                await HandleExceptionAsync(context, ex, HttpStatusCode.NoContent);
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-                await HandleExceptionAsync(httpContext, ex);
+                await HandleExceptionAsync(context, ex, HttpStatusCode.InternalServerError);
             }
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception, HttpStatusCode statusCode)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
